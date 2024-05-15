@@ -1,0 +1,70 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+}
+
+.desactive-tab-text {
+  display: none;
+}
+
+.vertical-align-middle {
+  vertical-align: middle !important;
+}
+
+body {
+  /*font-family: 'Roboto', sans-serif;
+  background-color: #f8f9fa;*/
+}
+
+.container {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+  /*background-color: #2c3e50;*/
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: #3498db;
+}
+
+.nav-link {
+  color: #ecf0f1;
+}
+
+.btn-outline-success {
+  color: #3498db;
+  border-color: #3498db;
+}
+
+.btn-outline-success:hover {
+  background-color: #3498db;
+  color: white;
+}
+
+.desactive-tab-text {
+  color: #95a5a6;
+}
+
+.card-header {
+  background-color: #4f92d6;
+  border-bottom: none;
+}
+
+.nav-link.active {
+  color: #3498db;
+  font-weight: 700;
+}
+
+.nav-item {
+  color: #95a5a6;
+}

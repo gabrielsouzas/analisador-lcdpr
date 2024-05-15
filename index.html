@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Analisador LCDPR</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">LCDPR</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" aria-disabled="true" href="#"
+                  >Ajuda</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link disabled" aria-disabled="true">Sobre</a>
+              </li>
+            </ul>
+            <button class="btn btn-outline-success" type="submit">
+              Github
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <p class="my-3 text-center">
+        Com esta página você pode visualizar os dados do arquivo gerado para o
+        LCDPR, de acordo com o
+        <a
+          href="https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/documentos-tecnicos/lcdpr/leiaute-lcdpr-1-3"
+          >layout 1.3 da documentação oficial</a
+        >. Para mais informações, veja:
+        <a
+          href="https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/manuais/manual-lcdpr/manual-lcdpr-1-3"
+          >MANUAL DE PREENCHIMENTO DO LIVRO CAIXA DIGITAL DO PRODUTOR RURAL
+          (LCDPR)</a
+        >
+      </p>
+
+      <input type="file" id="fileInput" accept=".txt" />
+      <pre id="output"></pre>
+
+      <div class="card text-center">
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs" id="myTab">
+            <li class="nav-item">
+              <a
+                id="link-cadastro"
+                class="nav-link active"
+                aria-current="true"
+                href="#"
+                onclick="tabClick('cadastro')"
+                >Cadastro</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                id="link-imoveis"
+                class="nav-link"
+                href="#"
+                onclick="tabClick('imoveis')"
+                >Imóveis Rurais</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                id="link-contas-bancarias"
+                class="nav-link"
+                href="#"
+                onclick="tabClick('contas-bancarias')"
+                >Contas Bancárias</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                id="link-totais"
+                class="nav-link"
+                href="#"
+                onclick="tabClick('totais')"
+                >Totais</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="card-body">
+          <div class="tab-content" id="myTabContent">
+            <div
+              class="tab-pane fade show active"
+              id="tab-cadastro"
+              role="tabpanel"
+              aria-labelledby="cadastro-tab"
+            >
+              <!--<div
+                class="card flex-md-col mb-4 box-shadow h-md-250"
+                id="0030-container"
+              >-->
+              <h5 id="cadastro-tab-title">Carregue um arquivo</h5>
+              <div id="0030-container" class="desactive-tab-text">
+                <div class="d-flex flex-column align-items-start">
+                  <div id="0030-endereco">
+                    <label class="mb-1 text-muted">Endereço:</label>
+                  </div>
+                  <div id="0030-num">
+                    <label class="mb-1 text-muted">Número:</label>
+                  </div>
+                  <div id="0030-compl">
+                    <label class="mb-1 text-muted">Complemento:</label>
+                  </div>
+                  <div id="0030-bairro">
+                    <label class="mb-1 text-muted">Bairro:</label>
+                  </div>
+                  <div id="0030-uf">
+                    <label class="mb-1 text-muted">UF:</label>
+                  </div>
+                  <div id="0030-cod_mun">
+                    <label class="mb-1 text-muted">Código Município:</label>
+                  </div>
+                  <div id="0030-cep">
+                    <label class="mb-1 text-muted">CEP:</label>
+                  </div>
+                  <div id="0030-num_tel">
+                    <label class="mb-1 text-muted">Telefone:</label>
+                  </div>
+                  <div id="0030-email">
+                    <label class="mb-1 text-muted">E-Mail:</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--</div>-->
+            <div
+              class="tab-pane fade"
+              id="tab-imoveis"
+              role="tabpanel"
+              aria-labelledby="imoveis-tab"
+            >
+              <div
+                class="table-responsive desactive-tab-text"
+                id="0040-container"
+              >
+                <!--<h5>Dados Imóveis Rurais</h5>-->
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="tab-contas-bancarias"
+              role="tabpanel"
+              aria-labelledby="contas-bancarias-tab"
+            >
+              <div
+                class="table-responsive desactive-tab-text"
+                id="0050-container"
+              >
+                <!--<h5>Dados Contas Bancárias</h5>-->
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="tab-totais"
+              role="tabpanel"
+              aria-labelledby="totais-tab"
+            >
+              <div
+                id="totais-container"
+                class="table-responsive desactive-tab-text"
+              >
+                <table
+                  class="table table-striped table-bordered"
+                  id="table-totais"
+                >
+                  <tbody>
+                    <tr>
+                      <th onclick="sortTable(0)">MÊS/ANO</th>
+                      <th onclick="sortTable(1)">ENTRADA</th>
+                      <th onclick="sortTable(2)">SAÍDA</th>
+                      <th onclick="sortTable(3)">SALDO</th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script defer src="js/index.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
