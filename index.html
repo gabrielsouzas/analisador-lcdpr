@@ -14,47 +14,62 @@
       href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900"
       rel="stylesheet"
     />
+    <!--Google Fonts-->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
     <link rel="stylesheet" href="css/index.css" />
   </head>
   <body>
-    <div class="container">
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">LCDPR</a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
+    <nav class="navbar navbar-expand-lg bg-body-tertiary p-2">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"
+          ><img
+            src="assets/_65487e73-2708-4d4d-8f5c-1635cf2fe8ef-removebg.png"
+            class="logo"
+            alt="..."
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link custom-active" aria-current="page" href="#"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" aria-disabled="true" href="#"
+                >Ajuda</a
+              >
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link disabled" aria-disabled="true">Sobre</a>
+            </li>
+          </ul>
+          <a
+            class="btn btn-outline-light"
+            type="submit"
+            href="https://github.com/gabrielsouzas/analisador-lcdpr"
+            target="_blank"
+            >Github</a
           >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" aria-disabled="true" href="#"
-                  >Ajuda</a
-                >
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link disabled" aria-disabled="true">Sobre</a>
-              </li>
-            </ul>
-            <button class="btn btn-outline-success" type="submit">
-              Github
-            </button>
-          </div>
         </div>
-      </nav>
-
-      <p class="my-3 text-center">
+      </div>
+    </nav>
+    <div class="container">
+      <p class="my-5 text-center">
         Com esta página você pode visualizar os dados do arquivo gerado para o
         LCDPR, de acordo com o
         <a
@@ -68,46 +83,62 @@
         >
       </p>
 
-      <input type="file" id="fileInput" accept=".txt" />
-      <pre id="output"></pre>
+      <div class="load-file-container mb-3">
+        <label for="fileInput" class="form-label"
+          >Carregue um arquivo para a análise</label
+        >
 
-      <div class="card text-center">
+        <input class="form-control" type="file" id="fileInput" accept=".txt" />
+        <pre id="output"></pre>
+      </div>
+
+      <!--<input type="file" id="fileInput" accept=".txt" />
+      <pre id="output"></pre>-->
+
+      <div class="card text-center mb-3">
         <div class="card-header">
           <ul class="nav nav-tabs card-header-tabs" id="myTab">
             <li class="nav-item">
               <a
                 id="link-cadastro"
-                class="nav-link active"
+                class="nav-link active custom-nav-link-tab"
                 aria-current="true"
                 href="#"
                 onclick="tabClick('cadastro')"
+              >
+                <span class="material-symbols-outlined custom-icon">
+                  assignment </span
                 >Cadastro</a
               >
             </li>
             <li class="nav-item">
               <a
                 id="link-imoveis"
-                class="nav-link"
+                class="nav-link custom-nav-link-tab"
                 href="#"
                 onclick="tabClick('imoveis')"
+                ><span class="material-symbols-outlined"> warehouse </span
                 >Imóveis Rurais</a
               >
             </li>
             <li class="nav-item">
               <a
                 id="link-contas-bancarias"
-                class="nav-link"
+                class="nav-link custom-nav-link-tab"
                 href="#"
                 onclick="tabClick('contas-bancarias')"
+                ><span class="material-symbols-outlined"> account_balance </span
                 >Contas Bancárias</a
               >
             </li>
             <li class="nav-item">
               <a
                 id="link-totais"
-                class="nav-link"
+                class="nav-link custom-nav-link-tab"
                 href="#"
                 onclick="tabClick('totais')"
+                ><span class="material-symbols-outlined custom-icon">
+                  paid </span
                 >Totais</a
               >
             </li>
@@ -213,7 +244,28 @@
           </div>
         </div>
       </div>
+
+      <!--<div class="alert alert-danger fixed-alert" role="alert">
+        <h4 class="alert-heading">Erros de Leitura de Arquivo</h4>
+        <p>Ocorreu(m) o(s) seguinte(s) erro(s) ao ler o arquivo:</p>
+        <ul>
+          <li>Erro 1: O arquivo está no formato incorreto.</li>
+          <li>Erro 2: O arquivo está corrompido.</li>
+          <li>Erro 3: O arquivo excede o tamanho máximo permitido.</li>
+        </ul>
+        <hr />
+        <p class="mb-0">
+          Corrija os erros e tente novamente. Se o problema persistir, entre em
+          contato com o suporte.
+        </p>
+      </div>-->
     </div>
+
+    <footer class="custom-footer bg-light text-dark py-4">
+      <div class="container text-center custom-text-footer">
+        <p>&copy; 2024 Analisador LCDPR. Todos os direitos reservados.</p>
+      </div>
+    </footer>
 
     <script defer src="js/index.js"></script>
     <script

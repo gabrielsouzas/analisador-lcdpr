@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 h1,
 h2,
 h3,
@@ -15,21 +17,35 @@ h6 {
   vertical-align: middle !important;
 }
 
+html {
+  /*height: 100%;*/
+}
+
 body {
-  /*font-family: 'Roboto', sans-serif;
-  background-color: #f8f9fa;*/
+  font-family: 'Jost', sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  background-color: #e9effa;
+
+  /*position: relative;
+  min-height: 100vh;*/
+  /*height: 100%; /*
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;*/
+}
+
+.logo {
+  height: 50px;
+  width: 50px;
 }
 
 .container {
-  background-color: white;
-  border-radius: 8px;
-  padding: 20px;
-  margin-top: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 100%;
 }
 
 .navbar {
-  /*background-color: #2c3e50;*/
+  background-color: #153d77 !important;
 }
 
 .navbar-brand {
@@ -38,7 +54,25 @@ body {
 }
 
 .nav-link {
-  color: #ecf0f1;
+  color: #ecf0f1 !important;
+}
+
+.nav-link:hover {
+  color: #3498db !important;
+}
+
+.nav-link.active {
+  color: #2a5ca7 !important;
+  font-weight: 700;
+}
+
+.custom-active {
+  color: rgb(177, 177, 177) !important;
+  font-weight: 500;
+}
+
+.nav-item {
+  color: #95a5a6;
 }
 
 .btn-outline-success {
@@ -55,16 +89,32 @@ body {
   color: #95a5a6;
 }
 
+/* Load File input */
+
+.load-file-container {
+  background-color: #7ca5e246;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+/* Card Tabs*/
+
+.card {
+  border: none;
+}
+
 .card-header {
-  background-color: #4f92d6;
+  background-color: #2a5ca7;
   border-bottom: none;
 }
 
-.nav-link.active {
-  color: #3498db;
-  font-weight: 700;
+.custom-nav-link-tab {
+  display: flex;
+  gap: 6px;
 }
 
-.nav-item {
-  color: #95a5a6;
+/* Footer */
+
+.custom-footer {
+  /*margin-top: 30px;*/
 }
