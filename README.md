@@ -8,6 +8,8 @@ O objetivo deste projeto é proporcionar aos produtores rurais e profissionais c
 
 Se você trabalha com o LCDPR ou está interessado em ferramentas de gestão financeira para o setor agrícola, confira o projeto e contribua com suas ideias e sugestões! Juntos, podemos simplificar e otimizar a gestão financeira para os produtores rurais. 💼🌾
 
+![Print Screen](print/print_02.png)
+
 ## 📝 Sobre
 
 O objetivo desse projeto é visualizar os dados do arquivo gerado para o LCDPR, de acordo com o [layout 1.3 da documentação oficial](https://www.gov.br/agricultura/pt-br/assuntos/politicas-e-programas/programa-de-substituicao-da-agricultura-por-cafe-de-qualidade-psaq).
