@@ -41,6 +41,7 @@ body {
 
 .container {
   height: 100%;
+  margin-top: 120px;
 }
 
 .navbar {
@@ -87,6 +88,26 @@ body {
 .desactive-tab-text {
   color: #95a5a6;
 }
+
+/* Abas */
+
+/*.tab-pane {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.form-group label {
+  font-weight: 500;
+}
+.form-group input {
+  margin-bottom: 15px;
+}
+#cadastro-tab-title {
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #333;
+} */
 
 /* Load File input */
 

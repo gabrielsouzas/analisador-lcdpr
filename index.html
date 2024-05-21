@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="css/index.css" />
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary p-2">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary p-2 fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="#"
           ><img
@@ -44,18 +44,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link custom-active" aria-current="page" href="#"
+              <a class="nav-link custom-active" aria-current="page" href="#home"
                 >Home</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true" href="#"
-                >Ajuda</a
-              >
+              <a class="nav-link" href="#sobre">Sobre</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">Sobre</a>
+              <a class="nav-link" href="#ajuda">Ajuda</a>
             </li>
           </ul>
           <a
@@ -68,7 +66,7 @@
         </div>
       </div>
     </nav>
-    <div class="container">
+    <div id="home" class="container">
       <p class="my-5 text-center">
         Com esta página você pode visualizar os dados do arquivo gerado para o
         LCDPR, de acordo com o
@@ -152,44 +150,138 @@
               role="tabpanel"
               aria-labelledby="cadastro-tab"
             >
-              <!--<div
-                class="card flex-md-col mb-4 box-shadow h-md-250"
-                id="0030-container"
-              >-->
               <h5 id="cadastro-tab-title">Carregue um arquivo</h5>
               <div id="0030-container" class="desactive-tab-text">
-                <div class="d-flex flex-column align-items-start">
-                  <div id="0030-endereco">
-                    <label class="mb-1 text-muted">Endereço:</label>
+                <form>
+                  <div class="row mb-3">
+                    <label for="inputEnd" class="col-sm-2 col-form-label"
+                      >Endereço</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        id="0030-endereco"
+                        type="text"
+                        class="form-control"
+                        id="inputEnd"
+                      />
+                    </div>
                   </div>
-                  <div id="0030-num">
-                    <label class="mb-1 text-muted">Número:</label>
+
+                  <div class="row mb-3">
+                    <label for="inputNum" class="col-sm-2 col-form-label"
+                      >Número</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        id="0030-num"
+                        type="number"
+                        class="form-control"
+                        id="inputNum"
+                      />
+                    </div>
                   </div>
-                  <div id="0030-compl">
-                    <label class="mb-1 text-muted">Complemento:</label>
+
+                  <div class="row mb-3">
+                    <label for="inputCompl" class="col-sm-2 col-form-label"
+                      >Complemento</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        id="0030-compl"
+                        type="text"
+                        class="form-control"
+                        id="inputCompl"
+                      />
+                    </div>
                   </div>
-                  <div id="0030-bairro">
-                    <label class="mb-1 text-muted">Bairro:</label>
+
+                  <div class="row mb-3">
+                    <label for="inputBairro" class="col-sm-2 col-form-label"
+                      >Bairro</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        id="0030-bairro"
+                        type="text"
+                        class="form-control"
+                        id="inputBairro"
+                      />
+                    </div>
                   </div>
-                  <div id="0030-uf">
-                    <label class="mb-1 text-muted">UF:</label>
+
+                  <div class="row mb-3">
+                    <label for="inputUf" class="col-sm-2 col-form-label"
+                      >UF</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        id="0030-uf"
+                        type="text"
+                        class="form-control"
+                        id="inputUf"
+                      />
+                    </div>
                   </div>
-                  <div id="0030-cod_mun">
-                    <label class="mb-1 text-muted">Código Município:</label>
+
+                  <div class="row mb-3">
+                    <label for="inputMun" class="col-sm-2 col-form-label"
+                      >Código Município</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        id="0030-cod_mun"
+                        type="number"
+                        class="form-control"
+                        id="inputMun"
+                      />
+                    </div>
                   </div>
-                  <div id="0030-cep">
-                    <label class="mb-1 text-muted">CEP:</label>
+
+                  <div class="row mb-3">
+                    <label for="inputCEP" class="col-sm-2 col-form-label"
+                      >CEP</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        id="0030-cep"
+                        type="text"
+                        class="form-control"
+                        id="inputCEP"
+                      />
+                    </div>
                   </div>
-                  <div id="0030-num_tel">
-                    <label class="mb-1 text-muted">Telefone:</label>
+
+                  <div class="row mb-3">
+                    <label for="inputTel" class="col-sm-2 col-form-label"
+                      >Telefone</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        id="0030-num_tel"
+                        type="tel"
+                        class="form-control"
+                        id="inputTel"
+                      />
+                    </div>
                   </div>
-                  <div id="0030-email">
-                    <label class="mb-1 text-muted">E-Mail:</label>
+
+                  <div class="row mb-3">
+                    <label for="inputEmail" class="col-sm-2 col-form-label"
+                      >E-Mail</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        id="0030-email"
+                        type="email"
+                        class="form-control"
+                        id="inputEmail"
+                      />
+                    </div>
                   </div>
-                </div>
+                </form>
               </div>
             </div>
-            <!--</div>-->
+
             <div
               class="tab-pane fade"
               id="tab-imoveis"
@@ -245,7 +337,7 @@
         </div>
       </div>
 
-      <div class="card mb-3">
+      <div id="sobre" class="card mb-3">
         <div class="card-header custom-card-header">Sobre</div>
         <div class="card-body">
           <h5 class="card-title">
@@ -278,21 +370,72 @@
             contribua com suas ideias e sugestões! Juntos, podemos simplificar e
             otimizar a gestão financeira para os produtores rurais. 💼🌾
           </p>
-          <a href="#" class="btn btn-primary">Mais informações</a>
+          <a
+            href="https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/declaracoes-e-demonstrativos/lcdpr-livro-caixa-digital-do-produtor-rural"
+            target="_blank"
+            class="btn btn-primary"
+            >Mais informações</a
+          >
         </div>
       </div>
 
-      <div class="card mb-3">
+      <div id="ajuda" class="card mb-3">
         <div class="card-header">Ajuda</div>
         <div class="card-body">
           <h5 class="card-title">Como utilizar esse analisador</h5>
           <p class="card-text">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex
-            officiis quidem iste, delectus, impedit quia necessitatibus dolorum
-            ipsam aliquam earum doloribus mollitia vero veniam qui minus? Saepe
-            nihil iusto adipisci!
+            Muitos programas de gestão empresarial possuem um módulo para
+            extrair e exportar os dados do LCDPR. Essa extração é feita com base
+            nas informações que a própria empresa relaciona para o Livro Caixa
+            ao longo do ano. Cada software tem seu jeito de lidar com essas
+            informações e essa geração, mas o que não deve mudar é o formato do
+            arquivo para envio na Receita Federal, que deve sempre seguir o
+            Layout estabelecido na página oficial, que até o momento é
+            <a
+              href="https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/declaracoes-e-demonstrativos/lcdpr-livro-caixa-digital-do-produtor-rural"
+              target="_blank"
+              >LCDPR - Livro Caixa Digital do Produtor Rural</a
+            >, com o layout 1.3.
           </p>
-          <a href="#" class="btn btn-primary">Mais informações</a>
+          <p>
+            Para desenvolver esse projeto foi utilizado o Datasul, da TOTVS. O
+            arquivo de exemplo pode ser visto logo abaixo:
+          </p>
+          <img
+            src="assets/LCDPR-FILE-SAMPLE.png"
+            class="img-fluid mb-3"
+            alt="Exemplo arquivo LCDPR"
+          />
+          <p>
+            Para analisar o seu arquivo, verifique se ele está seguindo o layout
+            1.3 do site da Receita Federal, em seguida clique em Escolher
+            Arquivo, será feito o carregamento e analise automática, caso ocorra
+            algum erro, deve ser mostrado na tela, se o seu arquivo estiver
+            correto e não for carregado corretamente sem nenhuma mensagem de
+            erro, entre em contado com o desenvolvedor
+            <a href="https://github.com/gabrielsouzas" target="_blank"
+              >Gabriel Souza</a
+            >.
+          </p>
+          <p>
+            Após o carregamento, navegue entre as abas para analisar os dados,
+            mas atenção, essa aplicação é gratuita e de código aberto, e não
+            deve ser usada como analise oficial, serve apenas para se ter uma
+            visão mais aprimorada da situação da entrega, e para corrigir
+            possíveis falhas na geração do arquivo, antes de passar pelo
+            analisador oficial da Receita Federal.
+          </p>
+          <p>
+            Este projeto está em fase de desenvolvimento, caso encontre alguma
+            falha ou melhoria, ficaremos à disposição para receber o seu
+            feedback.
+          </p>
+          <a
+            href="https://github.com/gabrielsouzas/analisador-lcdpr"
+            target="_blank"
+            class="btn btn-primary"
+            >Mais informações</a
+          >
         </div>
       </div>
 
@@ -313,9 +456,11 @@
     </div>
 
     <footer class="custom-footer bg-light text-dark py-4">
-      <div class="container text-center custom-text-footer">
-        <p>&copy; 2024 Analisador LCDPR. Todos os direitos reservados.</p>
-      </div>
+      <p class="text-center">
+        &copy; 2024 Analisador LCDPR. Todos os direitos reservados.
+      </p>
+      <!--<div class="container text-center custom-text-footer">
+      </div>-->
     </footer>
 
     <script defer src="js/index.js"></script>

@@ -253,17 +253,28 @@ const createTotalTable = () => {
 const insert0030Values = () => {
   try {
     if (jsonData0030.length > 0) {
-      const enderecoDiv = document.getElementById('0030-endereco');
-      const numDiv = document.getElementById('0030-num');
-      const complDiv = document.getElementById('0030-compl');
-      const bairroDiv = document.getElementById('0030-bairro');
-      const ufDiv = document.getElementById('0030-uf');
-      const cod_munDiv = document.getElementById('0030-cod_mun');
-      const cepDiv = document.getElementById('0030-cep');
-      const num_telDiv = document.getElementById('0030-num_tel');
-      const emailDiv = document.getElementById('0030-email');
+      const enderecoInput = document.getElementById('0030-endereco');
+      const numInput = document.getElementById('0030-num');
+      const complInput = document.getElementById('0030-compl');
+      const bairroInput = document.getElementById('0030-bairro');
+      const ufInput = document.getElementById('0030-uf');
+      const cod_munInput = document.getElementById('0030-cod_mun');
+      const cepInput = document.getElementById('0030-cep');
+      const num_telInput = document.getElementById('0030-num_tel');
+      const emailInput = document.getElementById('0030-email');
 
-      enderecoDiv.appendChild(createLabel(jsonData0030[0].ENDERECO));
+      enderecoInput.value = jsonData0030[0].ENDERECO;
+      numInput.value = jsonData0030[0].NUM;
+      complInput.value = jsonData0030[0].COMPL;
+      bairroInput.value = jsonData0030[0].BAIRRO;
+      ufInput.value = jsonData0030[0].UF;
+      cod_munInput.value = jsonData0030[0].COD_MUN;
+      cepInput.value = jsonData0030[0].CEP;
+      num_telInput.value = jsonData0030[0].NUM_TEL;
+      emailInput.value = jsonData0030[0].EMAIL;
+
+      // Versão antiga
+      /* enderecoDiv.appendChild(createLabel(jsonData0030[0].ENDERECO));
       numDiv.appendChild(createLabel(jsonData0030[0].NUM));
       complDiv.appendChild(createLabel(jsonData0030[0].COMPL));
       bairroDiv.appendChild(createLabel(jsonData0030[0].BAIRRO));
@@ -271,7 +282,7 @@ const insert0030Values = () => {
       cod_munDiv.appendChild(createLabel(jsonData0030[0].COD_MUN));
       cepDiv.appendChild(createLabel(jsonData0030[0].CEP));
       num_telDiv.appendChild(createLabel(jsonData0030[0].NUM_TEL));
-      emailDiv.appendChild(createLabel(jsonData0030[0].EMAIL));
+      emailDiv.appendChild(createLabel(jsonData0030[0].EMAIL));*/
     }
   } catch (error) {
     console.log(
@@ -433,7 +444,7 @@ const showTabs = () => {
   cadastroTitle.classList.add('desactive-tab-text');
 
   container0030.classList.remove('desactive-tab-text');
-  container0030.classList.add('d-flex', 'flex-column', 'align-items-center');
+  // container0030.classList.add('d-flex', 'flex-column', 'align-items-center');
 
   container0040.classList.remove('desactive-tab-text');
   container0050.classList.remove('desactive-tab-text');
