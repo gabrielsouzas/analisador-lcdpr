@@ -1,4 +1,6 @@
-# 📊 LCDPR - Analisador de Dados
+<img src="assets/LCDPR_LOGO-02-removebg.png" alt="Logo" width=280>
+
+</br>
 
 O LCDPR (Livro Caixa Digital do Produtor Rural) é uma parte crucial da gestão financeira para muitos produtores rurais, mas nem sempre é fácil visualizar e validar os dados contidos nesses arquivos, especialmente após edições manuais.
 
