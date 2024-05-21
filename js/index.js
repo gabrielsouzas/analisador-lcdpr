@@ -210,6 +210,8 @@ const formatToNumber = (value) => {
 
 const createTotalTable = () => {
   try {
+    const tableTotaisBody = document.getElementById('table-totais-body');
+
     if (jsonDataQ100.length > 0) {
       for (let month in sumByMonth) {
         if (sumByMonth.hasOwnProperty(month)) {
@@ -219,7 +221,7 @@ const createTotalTable = () => {
             sumByMonth[month].SALDO,
           ];
 
-          const row = tableTotais.insertRow();
+          const row = tableTotaisBody.insertRow();
           const cellMonth = row.insertCell();
           cellMonth.textContent = `${month}/${year}`;
 
@@ -233,13 +235,15 @@ const createTotalTable = () => {
       // Totais
       const tot = [totalEntrada, totalSaida, totalEntrada - totalSaida];
 
-      const row = tableTotais.insertRow();
+      const row = tableTotaisBody.insertRow();
       const cellMonth = row.insertCell();
       cellMonth.textContent = `TOTAIS`;
+      cellMonth.style.backgroundColor = '#fdffb6';
 
       tot.forEach((item) => {
         const cell = row.insertCell();
         cell.textContent = formatToMoney(item);
+        cell.style.backgroundColor = '#fdffb6';
       });
 
       // Ordenar tabela
@@ -326,24 +330,29 @@ function createTable(data) {
   table.classList.add('table');
   table.classList.add('table-striped');
   table.classList.add('table-bordered');
+  table.classList.add('table-hover');
 
   // Cria o cabeçalho da tabela
-  const headerRow = table.insertRow();
+  const thead = table.createTHead();
+  const headerRow = thead.insertRow();
   for (const key in data[0]) {
     const headerCell = document.createElement('th');
     headerCell.textContent = key;
+    headerCell.style.backgroundColor = '#a6bbd9';
     headerRow.appendChild(headerCell);
   }
 
   // Adiciona os dados à tabela
+  const tbody = document.createElement('tbody');
   data.forEach((item) => {
-    const row = table.insertRow();
+    const row = tbody.insertRow();
     for (const key in item) {
       const cell = row.insertCell();
       cell.classList.add('vertical-align-middle');
       cell.textContent = item[key];
     }
   });
+  table.appendChild(tbody);
 
   return table;
 }

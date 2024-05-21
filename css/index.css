@@ -133,6 +133,12 @@ body {
   gap: 6px;
 }
 
+/* Tabela totais */
+
+.table-totais-th {
+  background-color: #a6bbd9 !important;
+}
+
 /* Sobre e Ajuda */
 
 .card-header {
