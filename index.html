@@ -369,14 +369,24 @@
       >
         <h4 class="alert-heading">Erros de Leitura do Arquivo</h4>
         <p>Ocorreu(m) o(s) seguinte(s) erro(s) ao ler o arquivo:</p>
-        <ul id="error-line-container">
+        <div id="error-line-container"></div>
+        <!--<ul id="error-line-container">
           <li>Erro 1: O arquivo está no formato incorreto.</li>
-        </ul>
+        </ul>-->
         <hr />
         <p class="mb-0">
           Corrija os erros e tente novamente. Se o problema persistir, entre em
           contato com o suporte.
         </p>
+      </div>
+
+      <div
+        id="success-container"
+        class="alert alert-success d-flex align-items-center gap-2 desactive"
+        role="alert"
+      >
+        <span class="material-symbols-outlined"> task_alt </span>
+        Nenhum erro foi encontrado ao analisar o arquivo!
       </div>
 
       <div id="sobre" class="card mb-3">

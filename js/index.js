@@ -3,24 +3,24 @@ const output = document.getElementById('output');
 // const btnTotais = document.getElementById('btn-totais');
 const tableTotais = document.getElementById('table-totais');
 
-let jsonData0000 = [];
-let jsonData0010 = [];
-let jsonData0030 = [];
-let jsonData0040 = [];
-let jsonData0045 = [];
-let jsonData0050 = [];
-let jsonDataQ100 = [];
-let jsonDataQ200 = [];
-let jsonData9999 = [];
+var jsonData0000 = [];
+var jsonData0010 = [];
+var jsonData0030 = [];
+var jsonData0040 = [];
+var jsonData0045 = [];
+var jsonData0050 = [];
+var jsonDataQ100 = [];
+var jsonDataQ200 = [];
+var jsonData9999 = [];
 
-const errorLines = [];
+var errorLines = [];
 
 const year = 2023;
 
 var totalEntrada = 0;
 var totalSaida = 0;
 
-let sumByMonth = {
+var sumByMonth = {
   '01': { ENTRADA: 0, SAIDA: 0, SALDO: 0 },
   '02': { ENTRADA: 0, SAIDA: 0, SALDO: 0 },
   '03': { ENTRADA: 0, SAIDA: 0, SALDO: 0 },
@@ -174,6 +174,7 @@ function tabClick(id) {
 
 fileInput.addEventListener('change', function (e) {
   try {
+    clearData();
     const file = e.target.files[0];
     const reader = new FileReader();
 
@@ -193,11 +194,49 @@ fileInput.addEventListener('change', function (e) {
   }
 });
 
+// Limpar memória e resetar variáveis antes de processar novo arquivo
+function clearData() {
+  try {
+    jsonData0000 = [];
+    jsonData0010 = [];
+    jsonData0030 = [];
+    jsonData0040 = [];
+    jsonData0045 = [];
+    jsonData0050 = [];
+    jsonDataQ100 = [];
+    jsonDataQ200 = [];
+    jsonData9999 = [];
+
+    errorLines = [];
+
+    totalEntrada = 0;
+    totalSaida = 0;
+
+    resetDOMElements();
+  } catch (error) {
+    console.log(`Erro ao limpar dados carregados. Erro: ${error.message}`);
+  }
+}
+
+function resetDOMElements() {
+  try {
+    const tableContainer0050 = document.getElementById('0050-container');
+    const tableContainer0040 = document.getElementById('0040-container');
+    const tableTotaisBody = document.getElementById('table-totais-body');
+    tableContainer0050.innerHTML = '';
+    tableContainer0040.innerHTML = '';
+    tableTotaisBody.innerHTML = '';
+    // Resetar outras áreas do DOM conforme necessário
+  } catch (error) {
+    console.log(`erro ao resetar elementos do DOM. Erro: ${error.message}`);
+  }
+}
+
 function processFileLines(lines) {
   try {
     let auxSumEntrada = 0;
     let auxSumSaida = 0;
-    let contLine = 0;
+    let contLine = 1;
 
     lines.forEach((line) => {
       const values = line.split('|');
@@ -206,7 +245,7 @@ function processFileLines(lines) {
         console.log(
           `Erro de tamanho de campo na linha de número: ${contLine}. Texto da linha: ${line}`
         );
-        return;
+        // return;
       }
 
       if (!validateLine(values)) {
@@ -214,7 +253,7 @@ function processFileLines(lines) {
         console.log(
           `Erro de layout na linha de número: ${contLine}. Texto da linha: ${line}`
         );
-        return;
+        // return;
       }
 
       switch (values[0]) {
@@ -256,8 +295,10 @@ function processFileLines(lines) {
       contLine += 1;
     });
 
-    if (addError.length > 0) {
+    if (errorLines.length > 0) {
       showErrors();
+    } else {
+      showSuccess();
     }
   } catch (error) {
     console.log(`Erro ao processar linhas. Erro: ${error.message}`);
@@ -308,21 +349,38 @@ function validateFieldLength(line, lineNumber) {
 
 function addError(lineNumber, error, field, lineText) {
   const errorObj = {
-    lineNumber: lineNumber,
-    error: error,
-    field: field,
-    lineText: lineText,
+    Linha: lineNumber,
+    Erro: error,
+    'Valor Campo': field,
+    'Texto Linha': lineText,
   };
   errorLines.push(errorObj);
 }
 
 function showErrors() {
   try {
-    const errorContainer = document.getElementById('errors-container');
-    errorContainer.classList.remove('desactive');
+    if (errorLines.length > 0) {
+      const errorContainer = document.getElementById('errors-container');
+      errorContainer.classList.remove('desactive');
 
-    const errorLineContainer = document.getElementById('error-line-container');
-    errorLines.forEach((line) => {});
+      const errorLineContainer = document.getElementById(
+        'error-line-container'
+      );
+
+      const errorsTable = createTable(errorLines, 'rgb(229 156 164)');
+      errorLineContainer.appendChild(errorsTable);
+    }
+  } catch (error) {
+    console.log();
+  }
+}
+
+function showSuccess() {
+  try {
+    if (errorLines.length === 0) {
+      const successContainer = document.getElementById('success-container');
+      successContainer.classList.remove('desactive');
+    }
   } catch (error) {
     console.log();
   }
@@ -812,7 +870,7 @@ const insert0050Values = () => {
 };
 
 // Função para criar uma tabela HTML
-function createTable(data) {
+function createTable(data, headerColor = '#a6bbd9') {
   try {
     // Cria a tabela
     const table = document.createElement('table');
@@ -827,7 +885,7 @@ function createTable(data) {
     for (const key in data[0]) {
       const headerCell = document.createElement('th');
       headerCell.textContent = key;
-      headerCell.style.backgroundColor = '#a6bbd9';
+      headerCell.style.backgroundColor = headerColor;
       headerRow.appendChild(headerCell);
     }
 
