@@ -139,6 +139,12 @@ body {
   background-color: #a6bbd9 !important;
 }
 
+/* Logs */
+
+.desactive {
+  display: none !important;
+}
+
 /* Sobre e Ajuda */
 
 .card-header {

@@ -2,16 +2,25 @@ const fileInput = document.getElementById('fileInput');
 const output = document.getElementById('output');
 // const btnTotais = document.getElementById('btn-totais');
 const tableTotais = document.getElementById('table-totais');
-let jsonDataQ100 = [];
-let jsonData0030 = [];
-let jsonData0040 = [];
-let jsonData0050 = [];
+
+var jsonData0000 = [];
+var jsonData0010 = [];
+var jsonData0030 = [];
+var jsonData0040 = [];
+var jsonData0045 = [];
+var jsonData0050 = [];
+var jsonDataQ100 = [];
+var jsonDataQ200 = [];
+var jsonData9999 = [];
+
+var errorLines = [];
+
 const year = 2023;
 
 var totalEntrada = 0;
 var totalSaida = 0;
 
-let sumByMonth = {
+var sumByMonth = {
   '01': { ENTRADA: 0, SAIDA: 0, SALDO: 0 },
   '02': { ENTRADA: 0, SAIDA: 0, SALDO: 0 },
   '03': { ENTRADA: 0, SAIDA: 0, SALDO: 0 },
@@ -24,6 +33,117 @@ let sumByMonth = {
   10: { ENTRADA: 0, SAIDA: 0, SALDO: 0 },
   11: { ENTRADA: 0, SAIDA: 0, SALDO: 0 },
   12: { ENTRADA: 0, SAIDA: 0, SALDO: 0 },
+};
+
+const expectedLineLengths = {
+  '0000': 10,
+  '0010': 2,
+  '0030': 10,
+  '0040': 17,
+  '0045': 6,
+  '0050': 7,
+  Q100: 13,
+  Q200: 6,
+  9999: 7,
+};
+
+const fieldLengths = {
+  '0000': {
+    REG: 4,
+    NOME_ESC: 5,
+    COD_VER: 4,
+    CPF: 11,
+    NOME: 999,
+    IND_SIT_INI_PER: 1,
+    SIT_ESPECIAL: 1,
+    DT_SIT_ESP: 8,
+    DT_INI: 8,
+    DT_FIN: 8,
+  },
+  '0010': {
+    REG: 4,
+    FORMA_APUR: 1,
+  },
+  '0030': {
+    REG: 4,
+    ENDERECO: 150,
+    NUM: 6,
+    COMPL: 50,
+    BAIRRO: 50,
+    UF: 2,
+    COD_MUN: 7,
+    CEP: 8,
+    NUM_TEL: 15,
+    EMAIL: 115,
+  },
+  '0040': {
+    REG: 4,
+    COD_IMOVEL: 3,
+    PAIS: 2,
+    MOEDA: 3,
+    CAD_ITR: 8,
+    CAEPF: 14,
+    INSCR_ESTADUAL: 14,
+    NOME_IMOVEL: 50,
+    ENDERECO: 150,
+    NUM: 6,
+    COMPL: 50,
+    BAIRRO: 50,
+    UF: 2,
+    COD_MUN: 7,
+    CEP: 8,
+    TIPO_EXPLORACAO: 1,
+    PARTICIPACAO: 5,
+  },
+  '0045': {
+    REG: 4,
+    COD_IMÓVEL: 3,
+    TIPO_CONTRAPARTE: 1,
+    ID_CONTRAPARTE: 14,
+    NOME_CONTRAPARTE: 50,
+    PERC_CONTRAPARTE: 5,
+  },
+  '0050': {
+    REG: 4,
+    COD_CONTA: 3,
+    PAIS_CTA: 3,
+    BANCO: 3,
+    NOME_BANCO: 30,
+    AGENCIA: 4,
+    NUM_CONTA: 16,
+  },
+  Q100: {
+    REG: 4,
+    DATA: 8,
+    COD_IMOVEL: 3,
+    COD_CONTA: 3,
+    NUM_DOC: 999,
+    TIPO_DOC: 1,
+    HIST: 999,
+    ID_PARTIC: 14,
+    TIPO_LANC: 1,
+    VL_ENTRADA: 19,
+    VL_SAIDA: 19,
+    SLD_FIN: 19,
+    NAT_SLD_FIN: 1,
+  },
+  Q200: {
+    REG: 4,
+    MÊS: 6,
+    VL_ENTRADA: 19,
+    VL_SAIDA: 19,
+    SLD_FIN: 19,
+    NAT_SLD_FIN: 1,
+  },
+  9999: {
+    REG: 4,
+    IDENT_NOM: 999,
+    IDENT_CPF_CNPJ: 14,
+    IND_CRC: 999,
+    EMAIL: 115,
+    FONE: 15,
+    QTD_LIN: 30,
+  },
 };
 
 // Ativa o comportamento de abas
@@ -51,11 +171,449 @@ function tabClick(id) {
     console.log(`Erro ao gerenciar abas. Erro: ${error.message}`);
   }
 }
-/*var tabEl = document.getElementById('myTab');
-var tab = new bootstrap.Tab(tabEl);
-tab.show();*/
 
 fileInput.addEventListener('change', function (e) {
+  try {
+    clearData();
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      const lines = e.target.result.split('\n');
+      processFileLines(lines);
+      createTotalTable();
+      insert0030Values();
+      insert0040Values();
+      insert0050Values();
+    };
+
+    showTabs();
+    reader.readAsText(file);
+  } catch (error) {
+    console.log(`Erro ao extrair valores. Erro: ${error.message}`);
+  }
+});
+
+// Limpar memória e resetar variáveis antes de processar novo arquivo
+function clearData() {
+  try {
+    jsonData0000 = [];
+    jsonData0010 = [];
+    jsonData0030 = [];
+    jsonData0040 = [];
+    jsonData0045 = [];
+    jsonData0050 = [];
+    jsonDataQ100 = [];
+    jsonDataQ200 = [];
+    jsonData9999 = [];
+
+    errorLines = [];
+
+    totalEntrada = 0;
+    totalSaida = 0;
+
+    resetDOMElements();
+  } catch (error) {
+    console.log(`Erro ao limpar dados carregados. Erro: ${error.message}`);
+  }
+}
+
+function resetDOMElements() {
+  try {
+    const tableContainer0050 = document.getElementById('0050-container');
+    const tableContainer0040 = document.getElementById('0040-container');
+    const tableTotaisBody = document.getElementById('table-totais-body');
+    tableContainer0050.innerHTML = '';
+    tableContainer0040.innerHTML = '';
+    tableTotaisBody.innerHTML = '';
+    // Resetar outras áreas do DOM conforme necessário
+  } catch (error) {
+    console.log(`erro ao resetar elementos do DOM. Erro: ${error.message}`);
+  }
+}
+
+function processFileLines(lines) {
+  try {
+    let auxSumEntrada = 0;
+    let auxSumSaida = 0;
+    let contLine = 1;
+
+    lines.forEach((line) => {
+      const values = line.split('|');
+
+      if (!validateFieldLength(line, contLine)) {
+        console.log(
+          `Erro de tamanho de campo na linha de número: ${contLine}. Texto da linha: ${line}`
+        );
+        // return;
+      }
+
+      if (!validateLine(values)) {
+        addError(contLine, `Erro de layout`, 'Campo não identificado', line);
+        console.log(
+          `Erro de layout na linha de número: ${contLine}. Texto da linha: ${line}`
+        );
+        // return;
+      }
+
+      switch (values[0]) {
+        case '0000':
+          process0000(values);
+          break;
+        case '0010':
+          process0010(values);
+          break;
+        case '0030':
+          process0030(values);
+          break;
+        case '0040':
+          process0040(values);
+          break;
+        case '0045':
+          process0045(values);
+          break;
+        case '0050':
+          process0050(values);
+          break;
+        case 'Q100':
+          ({ auxSumEntrada, auxSumSaida } = processQ100(
+            values,
+            auxSumEntrada,
+            auxSumSaida
+          ));
+          break;
+        case 'Q200':
+          processQ200(values);
+          break;
+        case '9999':
+          process9999(values);
+          break;
+        default:
+          console.log(`Registro não reconhecido: ${values[0]}`);
+      }
+
+      contLine += 1;
+    });
+
+    if (errorLines.length > 0) {
+      showErrors();
+    } else {
+      showSuccess();
+    }
+  } catch (error) {
+    console.log(`Erro ao processar linhas. Erro: ${error.message}`);
+  }
+}
+
+function validateLine(values) {
+  return values.length === (expectedLineLengths[values[0]] || 0);
+}
+
+function validateFieldLength(line, lineNumber) {
+  const values = line.trim().split('|');
+  const type = values[0];
+  const fieldSpec = fieldLengths[type];
+
+  if (!fieldSpec) {
+    addError(lineNumber, 'Tipo de linha não reconhecido', type, line);
+    console.error(
+      `Tipo de linha não reconhecido: ${type}. Linha: ${lineNumber}`
+    );
+    return null;
+  }
+
+  const fieldNames = Object.keys(fieldSpec);
+  //const obj = {};
+  let isValid = true;
+
+  fieldNames.forEach((field, index) => {
+    const value = values[index] || '';
+    const maxLength = fieldSpec[field];
+    if (value.length > maxLength) {
+      addError(
+        lineNumber,
+        `O campo ${field} com o comprimento ${value.length} excede o comprimento máximo de ${maxLength}`,
+        value,
+        line
+      );
+      console.error(
+        `Campo ${field} com o valor ${value} e com o comprimento ${value.length} na linha ${type} excede o comprimento máximo de ${maxLength}. Linha: ${line}`
+      );
+      isValid = false;
+    }
+    //obj[field] = value;
+  });
+
+  return isValid; //? obj : null;
+}
+
+function addError(lineNumber, error, field, lineText) {
+  const errorObj = {
+    Linha: lineNumber,
+    Erro: error,
+    'Valor Campo': field,
+    'Texto Linha': lineText,
+  };
+  errorLines.push(errorObj);
+}
+
+function showErrors() {
+  try {
+    if (errorLines.length > 0) {
+      const errorContainer = document.getElementById('errors-container');
+      errorContainer.classList.remove('desactive');
+
+      const errorLineContainer = document.getElementById(
+        'error-line-container'
+      );
+
+      const errorsTable = createTable(errorLines, 'rgb(229 156 164)');
+      errorLineContainer.appendChild(errorsTable);
+    }
+  } catch (error) {
+    console.log();
+  }
+}
+
+function showSuccess() {
+  try {
+    if (errorLines.length === 0) {
+      const successContainer = document.getElementById('success-container');
+      successContainer.classList.remove('desactive');
+    }
+  } catch (error) {
+    console.log();
+  }
+}
+
+/*function validateFieldLengths(type, values) {
+  const expectedLengths = fieldLengths[type];
+  if (!expectedLengths) {
+    console.log(`Tipo de linha não reconhecido: ${type}`);
+    return false;
+  }
+
+  return Object.keys(expectedLengths).every((key, index) => {
+    if (!values[index]) return false; // Verifica se o valor existe
+    return values[index].length <= expectedLengths[key];
+  });
+}*/
+
+function process0000(values) {
+  try {
+    const obj = {
+      REG: values[0],
+      NOME_ESC: values[1],
+      COD_VER: values[2],
+      CPF: values[3],
+      NOME: values[4],
+      IND_SIT_INI_PER: values[5],
+      SIT_ESPECIAL: values[6],
+      DT_SIT_ESP: values[7],
+      DT_INI: values[8],
+      DT_FIN: values[9],
+    };
+    jsonData0000.push(obj);
+  } catch (error) {
+    console.log(
+      `Erro ao processar dados do registro ${values[0]}`,
+      error.message
+    );
+  }
+}
+
+function process0010(values) {
+  try {
+    const obj = {
+      REG: values[0],
+      FORMA_APUR: values[1],
+    };
+    jsonData0010.push(obj);
+  } catch (error) {
+    console.log(
+      `Erro ao processar dados do registro ${values[0]}`,
+      error.message
+    );
+  }
+}
+
+function process0030(values) {
+  try {
+    const obj = {
+      REG: values[0],
+      ENDERECO: values[1],
+      NUM: values[2],
+      COMPL: values[3],
+      BAIRRO: values[4],
+      UF: values[5],
+      COD_MUN: values[6],
+      CEP: values[7],
+      NUM_TEL: values[8],
+      EMAIL: values[9],
+    };
+    jsonData0030.push(obj);
+  } catch (error) {
+    console.log(
+      `Erro ao processar dados do registro ${values[0]}`,
+      error.message
+    );
+  }
+}
+
+function process0040(values) {
+  try {
+    const obj = {
+      REG: values[0],
+      COD_IMOVEL: values[1],
+      PAIS: values[2],
+      MOEDA: values[3],
+      CAD_ITR: values[4],
+      CAEPF: values[5],
+      INSCR_ESTADUAL: values[6],
+      NOME_IMOVEL: values[7],
+      ENDERECO: values[8],
+      NUM: values[9],
+      COMPL: values[10],
+      BAIRRO: values[11],
+      UF: values[12],
+      COD_MUN: values[13],
+      CEP: values[14],
+      TIPO_EXPLORACAO: values[15],
+      PARTICIPACAO: values[16],
+    };
+    jsonData0040.push(obj);
+  } catch (error) {
+    console.log(
+      `Erro ao processar dados do registro ${values[0]}`,
+      error.message
+    );
+  }
+}
+
+function process0045(values) {
+  try {
+    const obj = {
+      REG: values[0],
+      COD_IMOVEL: values[1],
+      TIPO_CONTRAPARTE: values[2],
+      ID_CONTRAPARTE: values[3],
+      NOME_CONTRAPARTE: values[4],
+      PERC_CONTRAPARTE: values[5],
+    };
+    jsonData0045.push(obj);
+  } catch (error) {
+    console.log(
+      `Erro ao processar dados do registro ${values[0]}`,
+      error.message
+    );
+  }
+}
+
+function process0050(values) {
+  try {
+    const obj = {
+      REG: values[0],
+      COD_CONTA: values[1],
+      PAIS_CTA: values[2],
+      BANCO: values[3],
+      NOME_BANCO: values[4],
+      AGENCIA: values[5],
+      NUM_CONTA: values[6],
+    };
+    jsonData0050.push(obj);
+  } catch (error) {
+    console.log(
+      `Erro ao processar dados do registro ${values[0]}`,
+      error.message
+    );
+  }
+}
+
+function processQ100(values, auxSumEntrada, auxSumSaida) {
+  try {
+    const entrada = formatToNumber(values[9]);
+    const saida = formatToNumber(values[10]);
+
+    auxSumEntrada += entrada;
+    auxSumSaida += saida;
+
+    addMonthValueOnArraySum(values[1], entrada, saida);
+
+    const obj = {
+      REG: values[0],
+      DATA: values[1],
+      COD_IMOVEL: values[2],
+      COD_CONTA: values[3],
+      NUM_DOC: values[4],
+      TIPO_DOC: values[5],
+      HIST: values[6],
+      ID_PARTIC: values[7],
+      TIPO_LANC: values[8],
+      VL_ENTRADA: entrada,
+      VL_SAIDA: saida,
+      SLD_FIN: values[11],
+      NAT_SLD_FIN: values[12],
+      SUM_ENTRADA: auxSumEntrada,
+      SUM_SAIDA: auxSumSaida,
+    };
+
+    totalEntrada = auxSumEntrada;
+    totalSaida = auxSumSaida;
+    jsonDataQ100.push(obj);
+
+    return { auxSumEntrada, auxSumSaida };
+  } catch (error) {
+    console.log(
+      `Erro ao processar dados do registro ${values[0]}`,
+      error.message
+    );
+  }
+}
+
+function processQ200(values) {
+  try {
+    const obj = {
+      REG: values[0],
+      MES: values[1],
+      VL_ENTRADA: values[2],
+      VL_SAIDA: values[3],
+      SLD_FIN: values[4],
+      NAT_SLD_FIN: values[5],
+    };
+    jsonDataQ200.push(obj);
+  } catch (error) {
+    console.log(
+      `Erro ao processar dados do registro ${values[0]}`,
+      error.message
+    );
+  }
+}
+
+function process9999(values) {
+  try {
+    const obj = {
+      REG: values[0],
+      IDENT_NOM: values[1],
+      IDENT_CPF_CNPJ: values[2],
+      IND_CRC: values[3],
+      EMAIL: values[4],
+      FONE: values[5],
+      QTD_LIN: values[6],
+    };
+    jsonData9999.push(obj);
+  } catch (error) {
+    console.log(
+      `Erro ao processar dados do registro ${values[0]}`,
+      error.message
+    );
+  }
+}
+
+/*function validateFieldLength(expectedLength, field) {
+  return field.length <= expectedLength;
+}*/
+
+/*fileInput.addEventListener('change', function (e) {
   try {
     let file = e.target.files[0];
     let reader = new FileReader();
@@ -173,14 +731,6 @@ fileInput.addEventListener('change', function (e) {
       insert0040Values();
       insert0050Values();
 
-      // Exiba o JSON formatado na página
-      /* document.getElementById('output').innerText = JSON.stringify(
-        jsonDataQ100,
-        null,
-        2
-      ); */
-
-      // document.getElementById('output').innerText = 'Dados extraidos com sucesso!';
     };
 
     showTabs();
@@ -189,11 +739,7 @@ fileInput.addEventListener('change', function (e) {
   } catch (error) {
     console.log(`Erro ao extrair valores. Erro: ${error.message}`);
   }
-});
-
-/* btnTotais.addEventListener('click', () => {
-  createTotalTable();
-}); */
+});*/
 
 const formatToNumber = (value) => {
   try {
@@ -324,37 +870,41 @@ const insert0050Values = () => {
 };
 
 // Função para criar uma tabela HTML
-function createTable(data) {
-  // Cria a tabela
-  const table = document.createElement('table');
-  table.classList.add('table');
-  table.classList.add('table-striped');
-  table.classList.add('table-bordered');
-  table.classList.add('table-hover');
+function createTable(data, headerColor = '#a6bbd9') {
+  try {
+    // Cria a tabela
+    const table = document.createElement('table');
+    table.classList.add('table');
+    table.classList.add('table-striped');
+    table.classList.add('table-bordered');
+    table.classList.add('table-hover');
 
-  // Cria o cabeçalho da tabela
-  const thead = table.createTHead();
-  const headerRow = thead.insertRow();
-  for (const key in data[0]) {
-    const headerCell = document.createElement('th');
-    headerCell.textContent = key;
-    headerCell.style.backgroundColor = '#a6bbd9';
-    headerRow.appendChild(headerCell);
-  }
-
-  // Adiciona os dados à tabela
-  const tbody = document.createElement('tbody');
-  data.forEach((item) => {
-    const row = tbody.insertRow();
-    for (const key in item) {
-      const cell = row.insertCell();
-      cell.classList.add('vertical-align-middle');
-      cell.textContent = item[key];
+    // Cria o cabeçalho da tabela
+    const thead = table.createTHead();
+    const headerRow = thead.insertRow();
+    for (const key in data[0]) {
+      const headerCell = document.createElement('th');
+      headerCell.textContent = key;
+      headerCell.style.backgroundColor = headerColor;
+      headerRow.appendChild(headerCell);
     }
-  });
-  table.appendChild(tbody);
 
-  return table;
+    // Adiciona os dados à tabela
+    const tbody = document.createElement('tbody');
+    data.forEach((item) => {
+      const row = tbody.insertRow();
+      for (const key in item) {
+        const cell = row.insertCell();
+        cell.classList.add('vertical-align-middle');
+        cell.textContent = item[key];
+      }
+    });
+    table.appendChild(tbody);
+
+    return table;
+  } catch (error) {
+    console.log(`Erro ao criar tabela. Erro: ${error.message}`);
+  }
 }
 
 const createLabel = (content) => {
