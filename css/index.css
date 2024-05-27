@@ -119,6 +119,10 @@ body {
 
 /* Card Tabs*/
 
+a {
+  cursor: pointer;
+}
+
 .card {
   border: none;
 }
