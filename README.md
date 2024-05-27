@@ -31,10 +31,18 @@ Para mais informações, veja: [MANUAL DE PREENCHIMENTO DO LIVRO CAIXA DIGITAL D
 3. Selecione o arquivo LCDPR que deseja visualizar.
 4. Os dados serão exibidos na página.
 
-## 🎯 Funcionalidades
+## ⚙️ Funcionalidades
 
 - Visualização de dados do arquivo LCDPR.
 - Cálculo de totais.
+- Verificação de tamanho dos campos.
+
+## 🎯 Futuras Funcionalidades
+
+- Exportar dados alterados para um novo arquivo no formato do LCDPR;
+- Verificar se o ID do Participante é um CPF ou CNPJ válido;
+- Verificar caracteres inválidos que não serão aceitos no validador da Receita Federal;
+- Busca de código de município;
 
 ## 🛠️ Tecnologias
 
