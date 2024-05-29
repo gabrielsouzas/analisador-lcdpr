@@ -143,6 +143,12 @@ a {
   background-color: #a6bbd9 !important;
 }
 
+/* Tabela erros*/
+
+#Erro {
+  min-width: 400px !important;
+}
+
 /* Logs */
 
 .desactive {

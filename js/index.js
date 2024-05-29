@@ -1,5 +1,13 @@
+import { municipios } from '../assets/municipios.js';
+import { normalizeString } from '../utils/format.js';
+import {
+  identificarCaracteresEspeciais,
+  validarMunicipio,
+} from '../utils/validation.js';
+// const municipios = require('../assets/municipios.js');
+
 const fileInput = document.getElementById('fileInput');
-const output = document.getElementById('output');
+// const output = document.getElementById('output');
 // const btnTotais = document.getElementById('btn-totais');
 const tableTotais = document.getElementById('table-totais');
 
@@ -147,7 +155,7 @@ const fieldLengths = {
 };
 
 // Ativa o comportamento de abas
-function tabClick(id) {
+export function tabClick(id) {
   try {
     const navLinks = document.querySelectorAll('.nav-link');
 
@@ -171,6 +179,8 @@ function tabClick(id) {
     console.log(`Erro ao gerenciar abas. Erro: ${error.message}`);
   }
 }
+
+window.tabClick = tabClick;
 
 fileInput.addEventListener('change', function (e) {
   try {
@@ -240,6 +250,19 @@ function processFileLines(lines) {
 
     lines.forEach((line) => {
       const values = line.split('|');
+
+      const validateLineCharacters = identificarCaracteresEspeciais(line);
+      if (validateLineCharacters) {
+        addError(
+          contLine,
+          validateLineCharacters.erro,
+          validateLineCharacters.valor,
+          line
+        );
+        console.log(
+          `Erro de escrita na linha de número: ${contLine}, caracteres inválidos encontrados. Texto da linha: ${line}`
+        );
+      }
 
       if (!validateFieldLength(line, contLine)) {
         console.log(
@@ -371,7 +394,7 @@ function showErrors() {
       errorLineContainer.appendChild(errorsTable);
     }
   } catch (error) {
-    console.log();
+    console.log(`Erro ao mostrar erros do arquivo. Erro: ${error.message}`);
   }
 }
 
@@ -382,7 +405,9 @@ function showSuccess() {
       successContainer.classList.remove('desactive');
     }
   } catch (error) {
-    console.log();
+    console.log(
+      `Erro verificar se o arquivo possui erros. Erro: ${error.message}`
+    );
   }
 }
 
@@ -447,6 +472,7 @@ function process0030(values) {
       BAIRRO: values[4],
       UF: values[5],
       COD_MUN: values[6],
+      NOME_MUN: validarMunicipio(values[6]),
       CEP: values[7],
       NUM_TEL: values[8],
       EMAIL: values[9],
@@ -477,6 +503,7 @@ function process0040(values) {
       BAIRRO: values[11],
       UF: values[12],
       COD_MUN: values[13],
+      NOME_MUN: validarMunicipio(values[13]),
       CEP: values[14],
       TIPO_EXPLORACAO: values[15],
       PARTICIPACAO: values[16],
@@ -809,6 +836,7 @@ const insert0030Values = () => {
       const bairroInput = document.getElementById('0030-bairro');
       const ufInput = document.getElementById('0030-uf');
       const cod_munInput = document.getElementById('0030-cod_mun');
+      const nome_munInput = document.getElementById('0030-nome_mun');
       const cepInput = document.getElementById('0030-cep');
       const num_telInput = document.getElementById('0030-num_tel');
       const emailInput = document.getElementById('0030-email');
@@ -819,6 +847,7 @@ const insert0030Values = () => {
       bairroInput.value = jsonData0030[0].BAIRRO;
       ufInput.value = jsonData0030[0].UF;
       cod_munInput.value = jsonData0030[0].COD_MUN;
+      nome_munInput.value = jsonData0030[0].NOME_MUN;
       cepInput.value = jsonData0030[0].CEP;
       num_telInput.value = jsonData0030[0].NUM_TEL;
       emailInput.value = jsonData0030[0].EMAIL;
@@ -884,6 +913,7 @@ function createTable(data, headerColor = '#a6bbd9') {
     const headerRow = thead.insertRow();
     for (const key in data[0]) {
       const headerCell = document.createElement('th');
+      headerCell.id = key.replace(' ', '');
       headerCell.textContent = key;
       headerCell.style.backgroundColor = headerColor;
       headerRow.appendChild(headerCell);
@@ -1009,3 +1039,50 @@ const showTabs = () => {
   container0050.classList.remove('desactive-tab-text');
   containerTotais.classList.remove('desactive-tab-text');
 };
+
+// Busca de municipio
+
+const btnSearchMun = document.getElementById('btnSearchMunicipio');
+
+btnSearchMun.addEventListener('click', () => {
+  try {
+    const municipiosSearchResult = document.getElementById('municipios-result');
+    const inputSearchMun = document.getElementById('inputSearchMunicipio');
+    const selSearchMun = document.getElementById('selSearchMunicipio');
+
+    var municipio = [{}];
+
+    if (inputSearchMun.value !== null && inputSearchMun.value.length > 0) {
+      if (selSearchMun.value === 'code') {
+        const searchCode = Number(inputSearchMun.value);
+        if (!isNaN(searchCode)) {
+          municipio[0] = municipios.find((mun) => mun.COD_MUN === searchCode);
+        } else {
+          alert(
+            `Digite um código numérico para buscar o município por código.`
+          );
+          console.log(`Erro ao buscar municipio. Código inválido`);
+        }
+      } else {
+        municipio = municipios.filter((mun) => {
+          return normalizeString(mun.NOM_MUN).includes(
+            normalizeString(inputSearchMun.value)
+          );
+        });
+      }
+
+      if (municipio.length > 0) {
+        const tableMunicipiosResult = createTable(municipio);
+        municipiosSearchResult.innerHTML = '';
+        municipiosSearchResult.appendChild(tableMunicipiosResult);
+      } else {
+        alert('Nenhum município encontrado!');
+      }
+    } else {
+      alert(`Digite um código ou nome de um município para pesquisar.`);
+      console.log(`Erro ao buscar municipio. Busca em branco`);
+    }
+  } catch (error) {
+    console.log(`Erro ao buscar município. Erro: ${error.message}`);
+  }
+});
