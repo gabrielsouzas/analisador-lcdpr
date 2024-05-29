@@ -33,16 +33,34 @@ Para mais informações, veja: [MANUAL DE PREENCHIMENTO DO LIVRO CAIXA DIGITAL D
 
 ## ⚙️ Funcionalidades
 
-- Visualização de dados do arquivo LCDPR.
-- Cálculo de totais.
-- Verificação de tamanho dos campos.
+- Visualização de dados do arquivo LCDPR:
+
+  <img src="assets/funcionalidades/dados_cadastrais.png" alt="Logo" width=600>
+
+- Cálculo de totais:
+
+  <img src="assets/funcionalidades/totais.png" alt="Logo" width=600>
+
+- Verificação de tamanho dos campos:
+
+  <img src="assets/funcionalidades/erro_tamanho_campo.png" alt="Logo" width=600>
+
+- Verificar caracteres inválidos que não serão aceitos no validador da Receita Federal:
+
+  <img src="assets/funcionalidades/erro_caracteres.png" alt="Logo" width=600>
+
+- Busca de código de município:
+
+  <img src="assets/funcionalidades/municipio_invalido.png" alt="Logo" width=300> <img src="assets/funcionalidades/municipio_valido.png" alt="Logo" width=300>
 
 ## 🎯 Futuras Funcionalidades
 
 - Exportar dados alterados para um novo arquivo no formato do LCDPR;
 - Verificar se o ID do Participante é um CPF ou CNPJ válido;
-- Verificar caracteres inválidos que não serão aceitos no validador da Receita Federal;
-- Busca de código de município;
+- Conferência de totais calculados no arquivo para totais inseridos manualmente;
+- Validação dos estabelecimentos (cruzar estabelecimento no registro 0040 com Q100);
+- Validação dos dados bancários (cruzar indice da conta no registro 0050 com Q100);
+- Verificação de número de linhas;
 
 ## 🛠️ Tecnologias
 

@@ -83,7 +83,8 @@
 
       <div class="load-file-container mb-3">
         <label for="fileInput" class="form-label"
-          >Carregue um arquivo para a análise</label
+          >Carregue um arquivo para a análise (Recomendável o formato UTF-8 para
+          evitar erros de caracteres inválidos)</label
         >
 
         <input class="form-control" type="file" id="fileInput" accept=".txt" />
@@ -234,6 +235,20 @@
                   </div>
 
                   <div class="row mb-3">
+                    <label for="inputNomeMun" class="col-sm-2 col-form-label"
+                      >Nome Município</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        id="0030-nome_mun"
+                        type="text"
+                        class="form-control"
+                        id="inputNomeMun"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
                     <label for="inputCEP" class="col-sm-2 col-form-label"
                       >CEP</label
                     >
@@ -365,7 +380,7 @@
       >
         <h4 class="alert-heading">Erros de Leitura do Arquivo</h4>
         <p>Ocorreu(m) o(s) seguinte(s) erro(s) ao ler o arquivo:</p>
-        <div id="error-line-container"></div>
+        <div id="error-line-container" class="table-responsive"></div>
         <!--<ul id="error-line-container">
           <li>Erro 1: O arquivo está no formato incorreto.</li>
         </ul>-->
@@ -383,6 +398,54 @@
       >
         <span class="material-symbols-outlined"> task_alt </span>
         Nenhum erro foi encontrado ao analisar o arquivo!
+      </div>
+
+      <div id="municipios" class="card mb-3">
+        <div class="card-header custom-card-header">Busca de município</div>
+        <div class="card-body">
+          <h5 class="card-title mb-3">
+            Digite o nome do município ou código para buscar na lista
+          </h5>
+
+          <div class="row row-cols-lg-auto g-3 align-items-center">
+            <div class="col-12">
+              <label class="visually-hidden" for="inputSearchMunicipio"
+                >Código ou Nome</label
+              >
+              <div class="input-group">
+                <div class="input-group-text">#</div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputSearchMunicipio"
+                  placeholder="Código ou Nome"
+                />
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label class="visually-hidden" for="selSearchMunicipio"
+                >Escolha</label
+              >
+              <select class="form-select" id="selSearchMunicipio">
+                <option selected value="name">Nome</option>
+                <option value="code">Código</option>
+              </select>
+            </div>
+
+            <div class="col-12">
+              <button
+                id="btnSearchMunicipio"
+                type="button"
+                class="btn btn-primary"
+              >
+                Pesquisar
+              </button>
+            </div>
+          </div>
+
+          <div id="municipios-result" class="table-responsive mt-3"></div>
+        </div>
       </div>
 
       <div id="sobre" class="card mb-3">
@@ -496,7 +559,7 @@
       </div>-->
     </footer>
 
-    <script defer src="js/index.js"></script>
+    <script defer type="module" src="js/index.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
