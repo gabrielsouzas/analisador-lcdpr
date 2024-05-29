@@ -35,23 +35,23 @@ Para mais informações, veja: [MANUAL DE PREENCHIMENTO DO LIVRO CAIXA DIGITAL D
 
 - Visualização de dados do arquivo LCDPR:
 
-  <img src="assets/funcionalidades/dados_cadastrais.png" alt="Logo" width=600>
+  <img src="assets/funcionalidades/dados_cadastrais.png" alt="Logo" width=800>
 
 - Cálculo de totais:
 
-  <img src="assets/funcionalidades/totais.png" alt="Logo" width=600>
+  <img src="assets/funcionalidades/totais.png" alt="Logo" width=800>
 
 - Verificação de tamanho dos campos:
 
-  <img src="assets/funcionalidades/erro_tamanho_campo.png" alt="Logo" width=600>
+  <img src="assets/funcionalidades/erro_tamanho_campo.png" alt="Logo" width=800>
 
 - Verificar caracteres inválidos que não serão aceitos no validador da Receita Federal:
 
-  <img src="assets/funcionalidades/erro_caracteres.png" alt="Logo" width=600>
+  <img src="assets/funcionalidades/erro_caracteres.png" alt="Logo" width=800>
 
 - Busca de código de município:
 
-  <img src="assets/funcionalidades/municipio_invalido.png" alt="Logo" width=300> <img src="assets/funcionalidades/municipio_valido.png" alt="Logo" width=300>
+  <img src="assets/funcionalidades/municipio_invalido.png" alt="Logo" width=400> <img src="assets/funcionalidades/municipio_valido.png" alt="Logo" width=400>
 
 ## 🎯 Futuras Funcionalidades
 
