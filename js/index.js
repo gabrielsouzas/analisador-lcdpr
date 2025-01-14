@@ -246,6 +246,7 @@ function processFileLines(lines) {
   try {
     let auxSumEntrada = 0;
     let auxSumSaida = 0;
+    let auxSaldo = 0;
     let contLine = 1;
 
     lines.forEach((line) => {
@@ -299,10 +300,11 @@ function processFileLines(lines) {
           process0050(values);
           break;
         case 'Q100':
-          ({ auxSumEntrada, auxSumSaida } = processQ100(
+          ({ auxSumEntrada, auxSumSaida, auxSaldo } = processQ100(
             values,
             auxSumEntrada,
-            auxSumSaida
+            auxSumSaida,
+            auxSaldo
           ));
           break;
         case 'Q200':
@@ -318,6 +320,8 @@ function processFileLines(lines) {
       contLine += 1;
     });
 
+    compararTotalizadores();
+
     if (errorLines.length > 0) {
       showErrors();
     } else {
@@ -325,6 +329,46 @@ function processFileLines(lines) {
     }
   } catch (error) {
     console.log(`Erro ao processar linhas. Erro: ${error.message}`);
+  }
+}
+
+function compararTotalizadores() {
+  try {
+    jsonDataQ200.forEach((month) => {
+      const monthIndex = month.MES.substr(0, 2);
+      const entradaSumByMonth = sumByMonth[monthIndex].ENTRADA;
+      const saidaSumByMonth = sumByMonth[monthIndex].SAIDA;
+      const saldoSumByMonth = sumByMonth[monthIndex].SALDO;
+
+      if (formatToNumber(month.VL_ENTRADA) !== entradaSumByMonth) {
+        addError(
+          'Q200',
+          `Diferença na somatória das Entradas do arquivo para o totalizador no bloco Q200. o valor somado: ${entradaSumByMonth} é diferente do valor no arquivo: ${month.VL_ENTRADA}`,
+          month.VL_ENTRADA,
+          `Q200|${month.MES}|${month.VL_ENTRADA}|${month.VL_SAIDA}|${month.SLD_FIN}|${month.NAT_SLD_FIN}`
+        );
+      }
+
+      if (formatToNumber(month.VL_SAIDA) !== saidaSumByMonth) {
+        addError(
+          'Q200',
+          `Diferença na somatória das Saídas do arquivo para o totalizador no bloco Q200. o valor somado: ${saidaSumByMonth} é diferente do valor no arquivo: ${month.VL_SAIDA}`,
+          month.VL_SAIDA,
+          `Q200|${month.MES}|${month.VL_ENTRADA}|${month.VL_SAIDA}|${month.SLD_FIN}|${month.NAT_SLD_FIN}`
+        );
+      }
+
+      if (formatToNumber(month.SLD_FIN) !== saldoSumByMonth) {
+        addError(
+          'Q200',
+          `Diferença na somatória dos Saldos do arquivo para o totalizador no bloco Q200. o valor somado: ${saldoSumByMonth} é diferente do valor no arquivo: ${month.SLD_FIN}`,
+          month.SLD_FIN,
+          `Q200|${month.MES}|${month.VL_ENTRADA}|${month.VL_SAIDA}|${month.SLD_FIN}|${month.NAT_SLD_FIN}`
+        );
+      }
+    });
+  } catch (error) {
+    console.log(`Erro ao comparar totalizadores. Erro: ${error.message}`);
   }
 }
 
@@ -556,15 +600,16 @@ function process0050(values) {
   }
 }
 
-function processQ100(values, auxSumEntrada, auxSumSaida) {
+function processQ100(values, auxSumEntrada, auxSumSaida, auxSaldo) {
   try {
     const entrada = formatToNumber(values[9]);
     const saida = formatToNumber(values[10]);
 
     auxSumEntrada += entrada;
     auxSumSaida += saida;
+    auxSaldo += entrada - saida;
 
-    addMonthValueOnArraySum(values[1], entrada, saida);
+    addMonthValueOnArraySum(values[1], entrada, saida, auxSaldo);
 
     const obj = {
       REG: values[0],
@@ -588,7 +633,7 @@ function processQ100(values, auxSumEntrada, auxSumSaida) {
     totalSaida = auxSumSaida;
     jsonDataQ100.push(obj);
 
-    return { auxSumEntrada, auxSumSaida };
+    return { auxSumEntrada, auxSumSaida, auxSaldo };
   } catch (error) {
     console.log(
       `Erro ao processar dados do registro ${values[0]}`,
@@ -768,6 +813,7 @@ function process9999(values) {
   }
 });*/
 
+// Formta um valor númérico de acordo com o LCDPR que vêm sem virgulas, para um valor numérico real
 const formatToNumber = (value) => {
   try {
     const splitAndConcat = `${value.substr(0, value.length - 2)}.${value.substr(
@@ -958,21 +1004,24 @@ const formatToMoney = (value) => {
   }
 };
 
-const addMonthValueOnArraySum = (data, entrada, saida) => {
+const addMonthValueOnArraySum = (data, entrada, saida, auxSaldo) => {
   try {
     const month = data.substr(2, 2);
     const sumEntrada = parseFloat(sumByMonth[month].ENTRADA + entrada).toFixed(
       2
     );
     const sumSaida = parseFloat(sumByMonth[month].SAIDA + saida).toFixed(2);
-    // console.log(Number(sumEntrada), Number(sumSaida));
+    const sumSaldo = parseFloat(auxSaldo).toFixed(2);
+
     sumByMonth[month].ENTRADA = Number(sumEntrada);
     sumByMonth[month].SAIDA = Number(sumSaida);
-    sumByMonth[month].SALDO = Number(sumEntrada) - Number(sumSaida);
+    sumByMonth[month].SALDO = Number(sumSaldo);
   } catch (error) {
     console.log(`Erro ao somar valores por mês. Erro: ${error.message}`);
   }
 };
+
+// saldo = entrada - saida + saldo
 
 function sortTable(n) {
   var table,

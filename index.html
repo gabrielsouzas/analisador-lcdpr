@@ -10,26 +10,19 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <link
-      href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet" />
     <!--Google Fonts-->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="css/index.css" />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary p-2 fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"
-          ><img
-            src="assets/LCDPR_LOGO_02.png"
-            class="logo"
-            alt="Logo Analisador LCDPR"
-        /></a>
+        <a class="navbar-brand" href="#">
+          <!-- <span class="navbar-subtitle">Analisador</span>
+          <h1 class="navbar-title">LCDPR</h1> -->
+          <img src="assets/icons/navbar-icon-small.png" class="logo" alt="Logo Analisador LCDPR" />
+        </a>
         <button
           class="navbar-toggler"
           type="button"
@@ -44,9 +37,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link custom-active" aria-current="page" href="#home"
-                >Home</a
-              >
+              <a class="nav-link custom-active" aria-current="page" href="#home">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#sobre">Sobre</a>
@@ -56,35 +47,24 @@
               <a class="nav-link" href="#ajuda">Ajuda</a>
             </li>
           </ul>
-          <a
-            class="btn btn-outline-light"
-            type="submit"
-            href="https://github.com/gabrielsouzas/analisador-lcdpr"
-            target="_blank"
-            >Github</a
-          >
+          <a class="btn btn-outline-light" type="submit" href="https://github.com/gabrielsouzas/analisador-lcdpr" target="_blank">Github</a>
         </div>
       </div>
     </nav>
     <div id="home" class="container">
       <p class="my-5 text-center">
-        Com esta página você pode visualizar os dados do arquivo gerado para o
-        LCDPR, de acordo com o
-        <a
-          href="https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/documentos-tecnicos/lcdpr/leiaute-lcdpr-1-3"
+        Com esta página você pode visualizar os dados do arquivo gerado para o LCDPR, de acordo com o
+        <a href="https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/documentos-tecnicos/lcdpr/leiaute-lcdpr-1-3"
           >layout 1.3 da documentação oficial</a
         >. Para mais informações, veja:
-        <a
-          href="https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/manuais/manual-lcdpr/manual-lcdpr-1-3"
-          >MANUAL DE PREENCHIMENTO DO LIVRO CAIXA DIGITAL DO PRODUTOR RURAL
-          (LCDPR)</a
+        <a href="https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/manuais/manual-lcdpr/manual-lcdpr-1-3"
+          >MANUAL DE PREENCHIMENTO DO LIVRO CAIXA DIGITAL DO PRODUTOR RURAL (LCDPR)</a
         >
       </p>
 
       <div class="load-file-container mb-3">
         <label for="fileInput" class="form-label"
-          >Carregue um arquivo para a análise (Recomendável o formato UTF-8 para
-          evitar erros de caracteres inválidos)</label
+          >Carregue um arquivo para a análise (Recomendável o formato UTF-8 para evitar erros de caracteres inválidos)</label
         >
 
         <input class="form-control" type="file" id="fileInput" accept=".txt" />
@@ -98,271 +78,125 @@
         <div class="card-header">
           <ul class="nav nav-tabs card-header-tabs" id="myTab">
             <li class="nav-item">
-              <a
-                id="link-cadastro"
-                class="nav-link active custom-nav-link-tab"
-                aria-current="true"
-                onclick="tabClick('cadastro')"
-              >
-                <span class="material-symbols-outlined custom-icon">
-                  assignment </span
-                >Cadastro</a
+              <a id="link-cadastro" class="nav-link active custom-nav-link-tab" aria-current="true" onclick="tabClick('cadastro')">
+                <span class="material-symbols-outlined custom-icon"> assignment </span>Cadastro</a
               >
             </li>
             <li class="nav-item">
-              <a
-                id="link-imoveis"
-                class="nav-link custom-nav-link-tab"
-                onclick="tabClick('imoveis')"
-                ><span class="material-symbols-outlined"> warehouse </span
-                >Imóveis Rurais</a
+              <a id="link-imoveis" class="nav-link custom-nav-link-tab" onclick="tabClick('imoveis')"
+                ><span class="material-symbols-outlined"> warehouse </span>Imóveis Rurais</a
               >
             </li>
             <li class="nav-item">
-              <a
-                id="link-contas-bancarias"
-                class="nav-link custom-nav-link-tab"
-                onclick="tabClick('contas-bancarias')"
-                ><span class="material-symbols-outlined"> account_balance </span
-                >Contas Bancárias</a
+              <a id="link-contas-bancarias" class="nav-link custom-nav-link-tab" onclick="tabClick('contas-bancarias')"
+                ><span class="material-symbols-outlined"> account_balance </span>Contas Bancárias</a
               >
             </li>
             <li class="nav-item">
-              <a
-                id="link-totais"
-                class="nav-link custom-nav-link-tab"
-                onclick="tabClick('totais')"
-                ><span class="material-symbols-outlined custom-icon">
-                  paid </span
-                >Totais</a
+              <a id="link-totais" class="nav-link custom-nav-link-tab" onclick="tabClick('totais')"
+                ><span class="material-symbols-outlined custom-icon"> paid </span>Totais</a
               >
             </li>
           </ul>
         </div>
         <div class="card-body">
           <div class="tab-content" id="myTabContent">
-            <div
-              class="tab-pane fade show active"
-              id="tab-cadastro"
-              role="tabpanel"
-              aria-labelledby="cadastro-tab"
-            >
+            <div class="tab-pane fade show active" id="tab-cadastro" role="tabpanel" aria-labelledby="cadastro-tab">
               <h5 id="cadastro-tab-title">Carregue um arquivo</h5>
               <div id="0030-container" class="desactive-tab-text">
                 <form>
                   <div class="row mb-3">
-                    <label for="inputEnd" class="col-sm-2 col-form-label"
-                      >Endereço</label
-                    >
+                    <label for="inputEnd" class="col-sm-2 col-form-label">Endereço</label>
                     <div class="col-sm-10">
-                      <input
-                        id="0030-endereco"
-                        type="text"
-                        class="form-control"
-                        id="inputEnd"
-                      />
+                      <input id="0030-endereco" type="text" class="form-control" id="inputEnd" />
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label for="inputNum" class="col-sm-2 col-form-label"
-                      >Número</label
-                    >
+                    <label for="inputNum" class="col-sm-2 col-form-label">Número</label>
                     <div class="col-sm-10">
-                      <input
-                        id="0030-num"
-                        type="number"
-                        class="form-control"
-                        id="inputNum"
-                      />
+                      <input id="0030-num" type="number" class="form-control" id="inputNum" />
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label for="inputCompl" class="col-sm-2 col-form-label"
-                      >Complemento</label
-                    >
+                    <label for="inputCompl" class="col-sm-2 col-form-label">Complemento</label>
                     <div class="col-sm-10">
-                      <input
-                        id="0030-compl"
-                        type="text"
-                        class="form-control"
-                        id="inputCompl"
-                      />
+                      <input id="0030-compl" type="text" class="form-control" id="inputCompl" />
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label for="inputBairro" class="col-sm-2 col-form-label"
-                      >Bairro</label
-                    >
+                    <label for="inputBairro" class="col-sm-2 col-form-label">Bairro</label>
                     <div class="col-sm-10">
-                      <input
-                        id="0030-bairro"
-                        type="text"
-                        class="form-control"
-                        id="inputBairro"
-                      />
+                      <input id="0030-bairro" type="text" class="form-control" id="inputBairro" />
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label for="inputUf" class="col-sm-2 col-form-label"
-                      >UF</label
-                    >
+                    <label for="inputUf" class="col-sm-2 col-form-label">UF</label>
                     <div class="col-sm-10">
-                      <input
-                        id="0030-uf"
-                        type="text"
-                        class="form-control"
-                        id="inputUf"
-                      />
+                      <input id="0030-uf" type="text" class="form-control" id="inputUf" />
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label for="inputMun" class="col-sm-2 col-form-label"
-                      >Código Município</label
-                    >
+                    <label for="inputMun" class="col-sm-2 col-form-label">Código Município</label>
                     <div class="col-sm-10">
-                      <input
-                        id="0030-cod_mun"
-                        type="number"
-                        class="form-control"
-                        id="inputMun"
-                      />
+                      <input id="0030-cod_mun" type="number" class="form-control" id="inputMun" />
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label for="inputNomeMun" class="col-sm-2 col-form-label"
-                      >Nome Município</label
-                    >
+                    <label for="inputNomeMun" class="col-sm-2 col-form-label">Nome Município</label>
                     <div class="col-sm-10">
-                      <input
-                        id="0030-nome_mun"
-                        type="text"
-                        class="form-control"
-                        id="inputNomeMun"
-                      />
+                      <input id="0030-nome_mun" type="text" class="form-control" id="inputNomeMun" />
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label for="inputCEP" class="col-sm-2 col-form-label"
-                      >CEP</label
-                    >
+                    <label for="inputCEP" class="col-sm-2 col-form-label">CEP</label>
                     <div class="col-sm-10">
-                      <input
-                        id="0030-cep"
-                        type="text"
-                        class="form-control"
-                        id="inputCEP"
-                      />
+                      <input id="0030-cep" type="text" class="form-control" id="inputCEP" />
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label for="inputTel" class="col-sm-2 col-form-label"
-                      >Telefone</label
-                    >
+                    <label for="inputTel" class="col-sm-2 col-form-label">Telefone</label>
                     <div class="col-sm-10">
-                      <input
-                        id="0030-num_tel"
-                        type="tel"
-                        class="form-control"
-                        id="inputTel"
-                      />
+                      <input id="0030-num_tel" type="tel" class="form-control" id="inputTel" />
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label for="inputEmail" class="col-sm-2 col-form-label"
-                      >E-Mail</label
-                    >
+                    <label for="inputEmail" class="col-sm-2 col-form-label">E-Mail</label>
                     <div class="col-sm-10">
-                      <input
-                        id="0030-email"
-                        type="email"
-                        class="form-control"
-                        id="inputEmail"
-                      />
+                      <input id="0030-email" type="email" class="form-control" id="inputEmail" />
                     </div>
                   </div>
                 </form>
               </div>
             </div>
 
-            <div
-              class="tab-pane fade"
-              id="tab-imoveis"
-              role="tabpanel"
-              aria-labelledby="imoveis-tab"
-            >
-              <div
-                class="table-responsive desactive-tab-text"
-                id="0040-container"
-              >
+            <div class="tab-pane fade" id="tab-imoveis" role="tabpanel" aria-labelledby="imoveis-tab">
+              <div class="table-responsive desactive-tab-text" id="0040-container">
                 <!--<h5>Dados Imóveis Rurais</h5>-->
               </div>
             </div>
-            <div
-              class="tab-pane fade"
-              id="tab-contas-bancarias"
-              role="tabpanel"
-              aria-labelledby="contas-bancarias-tab"
-            >
-              <div
-                class="table-responsive desactive-tab-text"
-                id="0050-container"
-              >
+            <div class="tab-pane fade" id="tab-contas-bancarias" role="tabpanel" aria-labelledby="contas-bancarias-tab">
+              <div class="table-responsive desactive-tab-text" id="0050-container">
                 <!--<h5>Dados Contas Bancárias</h5>-->
               </div>
             </div>
-            <div
-              class="tab-pane fade"
-              id="tab-totais"
-              role="tabpanel"
-              aria-labelledby="totais-tab"
-            >
-              <div
-                id="totais-container"
-                class="table-responsive desactive-tab-text"
-              >
-                <table
-                  class="table table-striped table-bordered table-hover"
-                  id="table-totais"
-                >
+            <div class="tab-pane fade" id="tab-totais" role="tabpanel" aria-labelledby="totais-tab">
+              <div id="totais-container" class="table-responsive desactive-tab-text">
+                <table class="table table-striped table-bordered table-hover" id="table-totais">
                   <thead class="table-totais-th">
                     <tr>
-                      <th
-                        class="table-totais-th"
-                        scope="col"
-                        onclick="sortTable(0)"
-                      >
-                        MÊS/ANO
-                      </th>
-                      <th
-                        class="table-totais-th"
-                        scope="col"
-                        onclick="sortTable(1)"
-                      >
-                        ENTRADA
-                      </th>
-                      <th
-                        class="table-totais-th"
-                        scope="col"
-                        onclick="sortTable(2)"
-                      >
-                        SAÍDA
-                      </th>
-                      <th
-                        class="table-totais-th"
-                        scope="col"
-                        onclick="sortTable(3)"
-                      >
-                        SALDO
-                      </th>
+                      <th class="table-totais-th" scope="col" onclick="sortTable(0)">MÊS/ANO</th>
+                      <th class="table-totais-th" scope="col" onclick="sortTable(1)">ENTRADA</th>
+                      <th class="table-totais-th" scope="col" onclick="sortTable(2)">SAÍDA</th>
+                      <th class="table-totais-th" scope="col" onclick="sortTable(3)">SALDO</th>
                     </tr>
                   </thead>
                   <tbody id="table-totais-body"></tbody>
@@ -373,11 +207,7 @@
         </div>
       </div>
 
-      <div
-        id="errors-container"
-        class="alert alert-danger fixed-alert desactive"
-        role="alert"
-      >
+      <div id="errors-container" class="alert alert-danger fixed-alert desactive" role="alert">
         <h4 class="alert-heading">Erros de Leitura do Arquivo</h4>
         <p>Ocorreu(m) o(s) seguinte(s) erro(s) ao ler o arquivo:</p>
         <div id="error-line-container" class="table-responsive"></div>
@@ -385,17 +215,10 @@
           <li>Erro 1: O arquivo está no formato incorreto.</li>
         </ul>-->
         <hr />
-        <p class="mb-0">
-          Corrija os erros e tente novamente. Se o problema persistir, entre em
-          contato com o suporte.
-        </p>
+        <p class="mb-0">Corrija os erros e tente novamente. Se o problema persistir, entre em contato com o suporte.</p>
       </div>
 
-      <div
-        id="success-container"
-        class="alert alert-success d-flex align-items-center gap-2 desactive"
-        role="alert"
-      >
+      <div id="success-container" class="alert alert-success d-flex align-items-center gap-2 desactive" role="alert">
         <span class="material-symbols-outlined"> task_alt </span>
         Nenhum erro foi encontrado ao analisar o arquivo!
       </div>
@@ -403,30 +226,19 @@
       <div id="municipios" class="card mb-3">
         <div class="card-header custom-card-header">Busca de município</div>
         <div class="card-body">
-          <h5 class="card-title mb-3">
-            Digite o nome do município ou código para buscar na lista
-          </h5>
+          <h5 class="card-title mb-3">Digite o nome do município ou código para buscar na lista</h5>
 
           <div class="row row-cols-lg-auto g-3 align-items-center">
             <div class="col-12">
-              <label class="visually-hidden" for="inputSearchMunicipio"
-                >Código ou Nome</label
-              >
+              <label class="visually-hidden" for="inputSearchMunicipio">Código ou Nome</label>
               <div class="input-group">
                 <div class="input-group-text">#</div>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="inputSearchMunicipio"
-                  placeholder="Código ou Nome"
-                />
+                <input type="text" class="form-control" id="inputSearchMunicipio" placeholder="Código ou Nome" />
               </div>
             </div>
 
             <div class="col-12">
-              <label class="visually-hidden" for="selSearchMunicipio"
-                >Escolha</label
-              >
+              <label class="visually-hidden" for="selSearchMunicipio">Escolha</label>
               <select class="form-select" id="selSearchMunicipio">
                 <option selected value="name">Nome</option>
                 <option value="code">Código</option>
@@ -434,13 +246,7 @@
             </div>
 
             <div class="col-12">
-              <button
-                id="btnSearchMunicipio"
-                type="button"
-                class="btn btn-primary"
-              >
-                Pesquisar
-              </button>
+              <button id="btnSearchMunicipio" type="button" class="btn btn-custom">Pesquisar</button>
             </div>
           </div>
 
@@ -451,40 +257,28 @@
       <div id="sobre" class="card mb-3">
         <div class="card-header custom-card-header">Sobre</div>
         <div class="card-body">
-          <h5 class="card-title">
-            Livro Caixa Digital do Produtor Rural (LCDPR)
-          </h5>
+          <h5 class="card-title">Livro Caixa Digital do Produtor Rural (LCDPR)</h5>
           <p class="card-text">
-            O LCDPR (Livro Caixa Digital do Produtor Rural) é uma parte crucial
-            da gestão financeira para muitos produtores rurais, mas nem sempre é
-            fácil visualizar e validar os dados contidos nesses arquivos,
-            especialmente após edições manuais.
+            O LCDPR (Livro Caixa Digital do Produtor Rural) é uma parte crucial da gestão financeira para muitos produtores rurais, mas nem
+            sempre é fácil visualizar e validar os dados contidos nesses arquivos, especialmente após edições manuais.
           </p>
           <p class="card-text">
-            Para resolver esse desafio, desenvolvi um Analisador do LCDPR, uma
-            ferramenta que simplifica a visualização e verificação desses dados
-            de forma clara e acessível. Com esse analisador, você pode carregar
-            facilmente um arquivo LCDPR e gerar relatórios que destacam os
-            totalizadores mensais e o total anual, permitindo uma verificação
-            rápida da integridade dos dados.
+            Para resolver esse desafio, desenvolvi um Analisador do LCDPR, uma ferramenta que simplifica a visualização e verificação desses
+            dados de forma clara e acessível. Com esse analisador, você pode carregar facilmente um arquivo LCDPR e gerar relatórios que destacam
+            os totalizadores mensais e o total anual, permitindo uma verificação rápida da integridade dos dados.
           </p>
           <p class="card-text">
-            O objetivo deste projeto é proporcionar aos produtores rurais e
-            profissionais contábeis uma maneira eficiente de validar e
-            visualizar os dados do LCDPR após alterações manuais, preenchendo
-            uma lacuna importante na gestão financeira digital do setor
-            agrícola.
+            O objetivo deste projeto é proporcionar aos produtores rurais e profissionais contábeis uma maneira eficiente de validar e visualizar
+            os dados do LCDPR após alterações manuais, preenchendo uma lacuna importante na gestão financeira digital do setor agrícola.
           </p>
           <p class="card-text">
-            Se você trabalha com o LCDPR ou está interessado em ferramentas de
-            gestão financeira para o setor agrícola, confira o projeto e
-            contribua com suas ideias e sugestões! Juntos, podemos simplificar e
-            otimizar a gestão financeira para os produtores rurais. 💼🌾
+            Se você trabalha com o LCDPR ou está interessado em ferramentas de gestão financeira para o setor agrícola, confira o projeto e
+            contribua com suas ideias e sugestões! Juntos, podemos simplificar e otimizar a gestão financeira para os produtores rurais. 💼🌾
           </p>
           <a
             href="https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/declaracoes-e-demonstrativos/lcdpr-livro-caixa-digital-do-produtor-rural"
             target="_blank"
-            class="btn btn-primary"
+            class="btn btn-custom"
             >Mais informações</a
           >
         </div>
@@ -495,12 +289,9 @@
         <div class="card-body">
           <h5 class="card-title">Como utilizar esse analisador</h5>
           <p class="card-text">
-            Muitos programas de gestão empresarial possuem um módulo para
-            extrair e exportar os dados do LCDPR. Essa extração é feita com base
-            nas informações que a própria empresa relaciona para o Livro Caixa
-            ao longo do ano. Cada software tem seu jeito de lidar com essas
-            informações e essa geração, mas o que não deve mudar é o formato do
-            arquivo para envio na Receita Federal, que deve sempre seguir o
+            Muitos programas de gestão empresarial possuem um módulo para extrair e exportar os dados do LCDPR. Essa extração é feita com base
+            nas informações que a própria empresa relaciona para o Livro Caixa ao longo do ano. Cada software tem seu jeito de lidar com essas
+            informações e essa geração, mas o que não deve mudar é o formato do arquivo para envio na Receita Federal, que deve sempre seguir o
             Layout estabelecido na página oficial, que até o momento é
             <a
               href="https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/declaracoes-e-demonstrativos/lcdpr-livro-caixa-digital-do-produtor-rural"
@@ -508,53 +299,30 @@
               >LCDPR - Livro Caixa Digital do Produtor Rural</a
             >, com o layout 1.3.
           </p>
+          <p>Para desenvolver esse projeto foi utilizado o Datasul, da TOTVS. O arquivo de exemplo pode ser visto logo abaixo:</p>
+          <img src="assets/LCDPR-FILE-SAMPLE.png" class="img-fluid mb-3" alt="Exemplo arquivo LCDPR" />
           <p>
-            Para desenvolver esse projeto foi utilizado o Datasul, da TOTVS. O
-            arquivo de exemplo pode ser visto logo abaixo:
-          </p>
-          <img
-            src="assets/LCDPR-FILE-SAMPLE.png"
-            class="img-fluid mb-3"
-            alt="Exemplo arquivo LCDPR"
-          />
-          <p>
-            Para analisar o seu arquivo, verifique se ele está seguindo o layout
-            1.3 do site da Receita Federal, em seguida clique em Escolher
-            Arquivo, será feito o carregamento e analise automática, caso ocorra
-            algum erro, deve ser mostrado na tela, se o seu arquivo estiver
-            correto e não for carregado corretamente sem nenhuma mensagem de
-            erro, entre em contado com o desenvolvedor
-            <a href="https://github.com/gabrielsouzas" target="_blank"
-              >Gabriel Souza</a
-            >.
+            Para analisar o seu arquivo, verifique se ele está seguindo o layout 1.3 do site da Receita Federal, em seguida clique em Escolher
+            Arquivo, será feito o carregamento e analise automática, caso ocorra algum erro, deve ser mostrado na tela, se o seu arquivo estiver
+            correto e não for carregado corretamente sem nenhuma mensagem de erro, entre em contado com o desenvolvedor
+            <a href="https://github.com/gabrielsouzas" target="_blank">Gabriel Souza</a>.
           </p>
           <p>
-            Após o carregamento, navegue entre as abas para analisar os dados,
-            mas atenção, essa aplicação é gratuita e de código aberto, e não
-            deve ser usada como analise oficial, serve apenas para se ter uma
-            visão mais aprimorada da situação da entrega, e para corrigir
-            possíveis falhas na geração do arquivo, antes de passar pelo
-            analisador oficial da Receita Federal.
+            Após o carregamento, navegue entre as abas para analisar os dados, mas atenção, essa aplicação é gratuita e de código aberto, e não
+            deve ser usada como analise oficial, serve apenas para se ter uma visão mais aprimorada da situação da entrega, e para corrigir
+            possíveis falhas na geração do arquivo, antes de passar pelo analisador oficial da Receita Federal.
           </p>
           <p>
-            Este projeto está em fase de desenvolvimento, caso encontre alguma
-            falha ou melhoria, ficaremos à disposição para receber o seu
+            Este projeto está em fase de desenvolvimento, caso encontre alguma falha ou melhoria, ficaremos à disposição para receber o seu
             feedback.
           </p>
-          <a
-            href="https://github.com/gabrielsouzas/analisador-lcdpr"
-            target="_blank"
-            class="btn btn-primary"
-            >Mais informações</a
-          >
+          <a href="https://github.com/gabrielsouzas/analisador-lcdpr" target="_blank" class="btn btn-custom">Mais informações</a>
         </div>
       </div>
     </div>
 
     <footer class="custom-footer bg-light text-dark py-4">
-      <p class="text-center">
-        &copy; 2024 Analisador LCDPR. Todos os direitos reservados.
-      </p>
+      <p class="text-center">&copy; 2024 Analisador LCDPR. Todos os direitos reservados.</p>
       <!--<div class="container text-center custom-text-footer">
       </div>-->
     </footer>
