@@ -56,3 +56,110 @@ export function identificarCaracteresEspeciais(texto) {
     console.log(`Erro ao validar caracteres da linha. Erro: ${error.message}`);
   }
 }
+
+export function validateCPF(cpf) {
+  try {
+    let sum = 0;
+    let remainder;
+
+    if (cpf === '00000000000') {
+      return { message: 'CPF inválido', response: false };
+    }
+
+    for (let i = 1; i <= 9; i++) {
+      sum += parseInt(cpf.substring(i - 1, i)) * (11 - i);
+    }
+
+    remainder = (sum * 10) % 11;
+
+    if (remainder === 10 || remainder === 11) {
+      remainder = 0;
+    }
+
+    if (remainder !== parseInt(cpf.substring(9, 10))) {
+      return { message: 'CPF inválido', response: false };
+    }
+
+    sum = 0;
+
+    for (let i = 1; i <= 10; i++) {
+      sum += parseInt(cpf.substring(i - 1, i)) * (12 - i);
+    }
+
+    remainder = (sum * 10) % 11;
+
+    if (remainder === 10 || remainder === 11) {
+      remainder = 0;
+    }
+
+    if (remainder !== parseInt(cpf.substring(10, 11))) {
+      return { message: 'CPF inválido', response: false };
+    }
+
+    return { message: 'CPF Válido', response: true };
+  } catch (error) {
+    console.log(`Erro ao validar CPF. Erro: ${error.message}`);
+    return { message: 'CPF inválido', response: false };
+  }
+}
+
+export function validateCNPJ(cnpj) {
+  try {
+    let sum = 0;
+    let length = cnpj.length - 2;
+    let numbers = cnpj.substring(0, length);
+    let digits = cnpj.substring(length);
+    let pos = length - 7;
+
+    for (let i = length; i >= 1; i--) {
+      sum += numbers.charAt(length - i) * pos--;
+      if (pos < 2) {
+        pos = 9;
+      }
+    }
+
+    let result = sum % 11 < 2 ? 0 : 11 - (sum % 11);
+
+    if (result !== parseInt(digits.charAt(0))) {
+      return { message: 'CNPJ inválido', response: false };
+    }
+
+    length = length + 1;
+    numbers = cnpj.substring(0, length);
+    sum = 0;
+    pos = length - 7;
+
+    for (let i = length; i >= 1; i--) {
+      sum += numbers.charAt(length - i) * pos--;
+      if (pos < 2) {
+        pos = 9;
+      }
+    }
+
+    result = sum % 11 < 2 ? 0 : 11 - (sum % 11);
+
+    if (result !== parseInt(digits.charAt(1))) {
+      return { message: 'CNPJ inválido', response: false };
+    }
+
+    return { message: 'CNPJ Válido', response: true };
+  } catch (error) {
+    console.log(`Erro ao validar CNPJ. Erro: ${error.message}`);
+    return { message: 'CNPJ inválido', response: false };
+  }
+}
+
+export function validateCPFAndCNPJ(value) {
+  try {
+    if (value.length === 11) {
+      return validateCPF(value);
+    } else if (value.length === 14) {
+      return validateCNPJ(value);
+    } else {
+      return { message: 'CPF/CNPJ inválido', response: false };
+    }
+  } catch (error) {
+    console.log(`Erro ao validar CPF/CNPJ. Erro: ${error.message}`);
+    return 'CPF/CNPJ inválido';
+  }
+}

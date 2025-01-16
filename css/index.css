@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+@font-face {
+  font-family: 'Open_Sans';
+  /* src: url('../assets/fonts/Open_Sans/OpenSans-Light.ttf') format('truetype'); */
+  src: url('../assets/fonts/Open_Sans/static/OpenSans-Light.ttf') format('truetype');
+}
+
 h1,
 h2,
 h3,
@@ -45,24 +51,47 @@ body {
 }
 
 .navbar {
-  background-color: #153d77 !important;
+  /* background-color: #153d77 !important; */
+  background-color: #081920 !important;
 }
 
 .navbar-brand {
   font-weight: 700;
-  color: #3498db;
+  /* color: #3498db; */
+  color: #0a2a33;
 }
+
+/* .navbar-title {
+  font-family: 'Open_Sans', sans-serif;
+  font-weight: 100;
+  font-size: 18pt;
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-subtitle {
+  font-family: 'Open_Sans', sans-serif;
+  font-weight: 100;
+  text-transform: uppercase;
+  font-size: 6pt;
+  letter-spacing: 1px;
+  margin: 0;
+  padding: 0;
+} */
 
 .nav-link {
   color: #ecf0f1 !important;
 }
 
 .nav-link:hover {
-  color: #3498db !important;
+  /* color: #3498db !important; */
+  color: #0e4c59 !important;
 }
 
 .nav-link.active {
-  color: #2a5ca7 !important;
+  /* color: #2a5ca7 !important; */
+  color: #105d6c !important;
   font-weight: 700;
 }
 
@@ -76,17 +105,27 @@ body {
 }
 
 .btn-outline-success {
-  color: #3498db;
-  border-color: #3498db;
+  color: #0e4c59;
+  border-color: #0e4c59;
 }
 
 .btn-outline-success:hover {
-  background-color: #3498db;
+  background-color: #0e4c59;
   color: white;
 }
 
 .desactive-tab-text {
   color: #95a5a6;
+}
+
+.btn-custom {
+  background-color: #2a6a77b9 !important;
+  color: white;
+}
+
+.btn-custom:hover {
+  background-color: #144f5c !important;
+  color: white;
 }
 
 /* Abas */
@@ -112,7 +151,8 @@ body {
 /* Load File input */
 
 .load-file-container {
-  background-color: #7ca5e246;
+  /* background-color: #7ca5e246; */
+  background-color: #1d4c5546;
   padding: 12px;
   border-radius: 8px;
 }
@@ -128,13 +168,20 @@ a {
 }
 
 .card-header {
-  background-color: #2a5ca7;
+  /* background-color: #2a5ca7; */
+  background-color: #0e4c59;
   border-bottom: none;
 }
 
 .custom-nav-link-tab {
   display: flex;
   gap: 6px;
+}
+
+.custom-nav-link-tab:hover {
+  color: #b0b3b39c !important;
+  border-width: 0px !important;
+  outline-width: 0px !important;
 }
 
 /* Tabela totais */

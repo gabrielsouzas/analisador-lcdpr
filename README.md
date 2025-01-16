@@ -53,14 +53,22 @@ Para mais informações, veja: [MANUAL DE PREENCHIMENTO DO LIVRO CAIXA DIGITAL D
 
   <img src="assets/funcionalidades/municipio_invalido.png" alt="Logo" width=400> <img src="assets/funcionalidades/municipio_valido.png" alt="Logo" width=400>
 
+- Mais funcionalidades recém adicionadas:
+
+  - Verificar se o ID do Participante é um CPF ou CNPJ válido;
+  - Conferência de totais calculados no arquivo para totais inseridos nas linhas Q200;
+  - Verificação de número de linhas;
+  - Validação dos estabelecimentos (cruzar estabelecimento no registro 0040 com Q100);
+  - Validação dos dados bancários (cruzar indice da conta no registro 0050 com Q100);
+
 ## 🎯 Futuras Funcionalidades
 
-- Exportar dados alterados para um novo arquivo no formato do LCDPR;
-- Verificar se o ID do Participante é um CPF ou CNPJ válido;
-- Conferência de totais calculados no arquivo para totais inseridos manualmente;
-- Validação dos estabelecimentos (cruzar estabelecimento no registro 0040 com Q100);
-- Validação dos dados bancários (cruzar indice da conta no registro 0050 com Q100);
-- Verificação de número de linhas;
+- Exportação de relatórios em formatos como PDF, Excel ou CSV.
+- Integração com APIs de validação de CPF/CNPJ e geolocalização.
+- Interface de usuário melhorada com frameworks modernos.
+- Histórico de validações realizadas.
+- Validação de dados adicionais, como duplicidade de registros e consistência de datas.
+- Dashboard interativo para análise de dados.
 
 ## 🛠️ Tecnologias
 
