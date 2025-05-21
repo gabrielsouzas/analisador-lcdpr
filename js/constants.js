@@ -10,8 +10,6 @@ export var jsonData9999 = [];
 
 export var errorLines = [];
 
-export const year = 2023;
-
 export var totalEntrada = 0;
 export var totalSaida = 0;
 

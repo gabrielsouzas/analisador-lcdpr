@@ -16,7 +16,6 @@ import {
   jsonDataQ100,
   jsonDataQ200,
   sumByMonth,
-  year,
 } from './constants.js';
 
 let totalSaida = 0;
@@ -552,6 +551,8 @@ function verifyCodImovel(codImovel, lineText, lineNumber) {
 const createTotalTable = () => {
   try {
     const tableTotaisBody = document.getElementById('table-totais-body');
+
+    const year = jsonData0000[0].DT_FIN.substr(4, 4);
 
     if (jsonDataQ100.length > 0) {
       for (let month in sumByMonth) {
