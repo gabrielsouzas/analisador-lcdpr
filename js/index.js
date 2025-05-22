@@ -176,6 +176,7 @@ function processFileLines(lines) {
     });
 
     compararTotalizadores();
+    compararSaldo();
 
     verifyNumberOfLines(contLine);
 
@@ -195,7 +196,7 @@ function compararTotalizadores() {
       const monthIndex = month.MES.substr(0, 2);
       const entradaSumByMonth = sumByMonth[monthIndex].ENTRADA;
       const saidaSumByMonth = sumByMonth[monthIndex].SAIDA;
-      const saldoSumByMonth = sumByMonth[monthIndex].SALDO;
+      const saldoSumByMonth = Math.abs(sumByMonth[monthIndex].SALDO);
 
       if (formatToNumber(month.VL_ENTRADA) !== entradaSumByMonth) {
         addError(
@@ -226,6 +227,36 @@ function compararTotalizadores() {
     });
   } catch (error) {
     console.log(`Erro ao comparar totalizadores. Erro: ${error.message}`);
+  }
+}
+
+function compararSaldo() {
+  try {
+    jsonDataQ200.forEach((month) => {
+      const monthIndex = month.MES.substr(0, 2);
+      const nat_sld_fin = month.NAT_SLD_FIN.toString().trim();
+      const saldoSumByMonth = sumByMonth[monthIndex].SALDO;
+
+      if (saldoSumByMonth < 0 && nat_sld_fin !== 'N') {
+        addError(
+          month.LINE_NUMBER,
+          `Diferença no identificador do Saldo Final no totalizador no bloco Q200. O valor de saldo: ${saldoSumByMonth} é negativo (N) e o NAT_SLD_FIN está positivo (P): ${month.NAT_SLD_FIN}`,
+          month.NAT_SLD_FIN,
+          `Q200|${month.MES}|${month.VL_ENTRADA}|${month.VL_SAIDA}|${month.SLD_FIN}|${month.NAT_SLD_FIN}`
+        );
+      }
+
+      if (saldoSumByMonth > 0 && nat_sld_fin !== 'P') {
+        addError(
+          month.LINE_NUMBER,
+          `Diferença no identificador do Saldo Final no totalizador no bloco Q200. O valor de saldo: ${saldoSumByMonth} é positivo (P) e o NAT_SLD_FIN está negativo (N): ${month.NAT_SLD_FIN}`,
+          month.NAT_SLD_FIN,
+          `Q200|${month.MES}|${month.VL_ENTRADA}|${month.VL_SAIDA}|${month.SLD_FIN}|${month.NAT_SLD_FIN}`
+        );
+      }
+    });
+  } catch (error) {
+    console.log(`Erro ao comparar saldos com o indentificador de saldo final (P/N). Erro: ${error.message}`);
   }
 }
 
