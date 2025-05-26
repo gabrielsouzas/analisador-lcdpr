@@ -24,6 +24,72 @@ var totalEntrada = 0;
 const fileInput = document.getElementById('fileInput');
 const tableTotais = document.getElementById('table-totais');
 
+const loadFileContainer = document.getElementById('load-file-container');
+const blurLayer = document.getElementById('blur-layer');
+let isDataLoaded = false;
+
+loadFileContainer.addEventListener('mouseenter', function () {
+  if (isDataLoaded) {
+    // Aplica blur somente na camada interna
+    blurLayer.style.filter = 'blur(3px)';
+    fileInput.style.pointerEvents = 'none';
+    loadFileContainer.style.position = 'relative';
+
+    let reloadBtn = document.createElement('button');
+    reloadBtn.id = 'reload-btn';
+    reloadBtn.textContent = 'Recarregar';
+    reloadBtn.classList.add('btn-reload');
+    reloadBtn.onclick = reloadPageAndClearCache;
+
+    loadFileContainer.appendChild(reloadBtn);
+  }
+});
+
+loadFileContainer.addEventListener('mouseleave', function () {
+  // Remove o blur e o botão de recarregar quando o mouse sai do container
+  blurLayer.style.filter = 'none';
+  fileInput.style.pointerEvents = 'auto';
+  const reloadBtn = document.getElementById('reload-btn');
+  if (reloadBtn) {
+    reloadBtn.remove();
+  }
+  loadFileContainer.style.position = 'static';
+});
+
+// loadFileContainer.addEventListener('mouseenter', function () {
+//   if (!isDataLoaded) {
+//     // Desativa o clique do fileInput
+//     fileInput.style.pointerEvents = 'none';
+//     loadFileContainer.style.filter = 'blur(3px)';
+
+//     let reloadBtn = document.createElement('button');
+//     reloadBtn.id = 'reload-btn';
+//     reloadBtn.textContent = 'Recarregar Página';
+//     reloadBtn.style.position = 'absolute';
+//     reloadBtn.style.top = '50%';
+//     reloadBtn.style.left = '50%';
+//     reloadBtn.style.transform = 'translate(-50%, -50%)';
+//     reloadBtn.style.zIndex = '10';
+//     reloadBtn.style.padding = '12px 24px';
+//     reloadBtn.style.fontSize = '1.1rem';
+//     reloadBtn.style.background = '#1976d2';
+//     reloadBtn.style.color = '#fff';
+//     reloadBtn.style.border = 'none';
+//     reloadBtn.style.borderRadius = '6px';
+//     reloadBtn.style.cursor = 'pointer';
+//     reloadBtn.onclick = reloadPageAndClearCache;
+//     loadFileContainer.style.position = 'relative';
+
+//     // Remove blur from the button itself
+//     reloadBtn.style.filter = 'none';
+
+//     // Optionally, add a backdrop to make it stand out
+//     reloadBtn.style.boxShadow = '0 4px 16px rgba(0,0,0,0.15)';
+
+//     loadFileContainer.appendChild(reloadBtn);
+//   }
+// });
+
 // Ativa o comportamento de abas
 export function tabClick(id) {
   try {
@@ -69,6 +135,7 @@ fileInput.addEventListener('change', function (e) {
 
     showTabs();
     reader.readAsText(file);
+    isDataLoaded = true;
   } catch (error) {
     console.log(`Erro ao extrair valores. Erro: ${error.message}`);
   }
@@ -106,9 +173,25 @@ function resetDOMElements() {
     tableContainer0050.innerHTML = '';
     tableContainer0040.innerHTML = '';
     tableTotaisBody.innerHTML = '';
-    // Resetar outras áreas do DOM conforme necessário
   } catch (error) {
     console.log(`erro ao resetar elementos do DOM. Erro: ${error.message}`);
+  }
+}
+
+function reloadPageAndClearCache() {
+  try {
+    // Limpa o cache do navegador
+    if ('caches' in window) {
+      caches.keys().then((cacheNames) => {
+        cacheNames.forEach((cacheName) => {
+          caches.delete(cacheName);
+        });
+      });
+    }
+    // Recarrega a página
+    window.location.reload();
+  } catch (error) {
+    console.log(`Erro ao recarregar a página e limpar o cache. Erro: ${error.message}`);
   }
 }
 
