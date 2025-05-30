@@ -28,6 +28,7 @@ const loadFileContainer = document.getElementById('load-file-container');
 const blurLayer = document.getElementById('blur-layer');
 let isDataLoaded = false;
 
+// Cria um blur e adicona um botão de recarregar quando o mouse entra no container de carregamento do arquivo
 loadFileContainer.addEventListener('mouseenter', function () {
   if (isDataLoaded) {
     // Aplica blur somente na camada interna
