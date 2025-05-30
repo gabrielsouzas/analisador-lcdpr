@@ -62,13 +62,23 @@
         >
       </p>
 
-      <div class="load-file-container mb-3">
+      <!-- <div class="load-file-container mb-3" id="load-file-container">
         <label for="fileInput" class="form-label"
           >Carregue um arquivo para a análise (Recomendável o formato UTF-8 para evitar erros de caracteres inválidos)</label
         >
 
         <input class="form-control" type="file" id="fileInput" accept=".txt" />
         <pre id="output"></pre>
+      </div> -->
+
+      <div class="load-file-container mb-3" id="load-file-container">
+        <div id="blur-layer">
+          <label for="fileInput" class="form-label">
+            Carregue um arquivo para a análise (Recomendável o formato UTF-8 para evitar erros de caracteres inválidos)
+          </label>
+          <input class="form-control" type="file" id="fileInput" accept=".txt" />
+          <pre id="output"></pre>
+        </div>
       </div>
 
       <!--<input type="file" id="fileInput" accept=".txt" />

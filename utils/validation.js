@@ -151,12 +151,21 @@ export function validateCNPJ(cnpj) {
 
 export function validateCPFAndCNPJ(value) {
   try {
+    if (!value || typeof value !== 'string') {
+      return { message: 'CPF/CNPJ inválido. Valor deve ser uma string', response: false };
+    }
+    // detecta espaços em branco e retorna uma mensagem de erro
+    if (value.includes(' ')) {
+      return { message: 'CPF/CNPJ inválido. Valor não pode conter espaços em branco', response: false };
+    }
+    // value = value.replace(/\D/g, ''); // Remove caracteres não numéricos
+    // value = value.trim(); // Remove espaços em branco
     if (value.length === 11) {
       return validateCPF(value);
     } else if (value.length === 14) {
       return validateCNPJ(value);
     } else {
-      return { message: 'CPF/CNPJ inválido', response: false };
+      return { message: 'CPF/CNPJ inválido. Tamanho diferente de 11 (CPF) ou 14 (CNPJ)', response: false };
     }
   } catch (error) {
     console.log(`Erro ao validar CPF/CNPJ. Erro: ${error.message}`);
